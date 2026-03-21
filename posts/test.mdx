@@ -1,0 +1,374 @@
+---
+id: "test"
+title: "Test Post"
+date: "03/21/2026"
+description: "This is a test post"
+---
+
+# Test Post
+
+This is a test post.
+
+## LaTeX Examples
+
+Here's some inline math: The quadratic formula is <InlineMath math="x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}" />.
+
+And here's a block math formula:
+
+<BlockMath math="\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}" />
+
+## Subsection
+
+This is a subsection to test the table of contents.
+
+### Sub-subsection
+
+This is a sub-subsection.
+
+Here's another LaTeX equation:
+
+<BlockMath math="E = mc^2" />
+
+## Another Section
+
+This is another section to demonstrate the table of contents functionality.
+
+More inline math: <InlineMath math="\sum_{i=1}^{n} i = \frac{n(n+1)}{2}" />.
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+/**
+ * Caesar cipher: rotate each alphabetic char in s by shift (wrap A-Z, a-z).
+ * Non-letter behavior is undefined for this version.
+ * Time complexity: O(n)
+ * @param s string to encode
+ * @param shift shift amount
+ */
+string caesarCipher(string s, int shift)
+{
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (isupper(s[i]))
+        {
+            s[i] = (char)(((s[i] + shift) - 'A') % 26 + 'A');
+        }
+        else
+        {
+            s[i] = (char)(((s[i] + shift) - 'a') % 26 + 'a');
+        }
+    }
+    return s;
+}
+
+// mazerun code
+const int N = 2;
+int bestScore = 0;
+bool visited[N][N];
+int grid[N][N];
+bool found = false;
+
+/**
+ * DFS path search in an N×N grid maximizing score to bottom-right.
+ * Avoids immediate reverse move using prevDir.
+ * Time complexity: O(4^(N*N)) worst-case (pruned by visited).
+ * @param row current row
+ * @param col current column
+ * @param prevDir previous direction (0=E,1=S,2=W,3=N,-1 start)
+ * @param score accumulated score
+ */
+void mazerun(int row, int col, int prevDir, int score)
+{
+    if (row == N - 1 && col == N - 1)
+    {
+        bestScore = max(bestScore, score);
+        found = true;
+        return;
+    }
+    if (visited[row][col])
+    {
+        return;
+    }
+    visited[row][col] = true;
+    for (int dir = 0; dir < 4; dir++)
+    {
+        switch (dir)
+        {
+        case 0:
+            if (col < N - 1 && prevDir != 2)
+            {
+                mazerun(row, col + 1, 0, score + grid[row][col + 1]); // east
+            }
+            break;
+        case 1:
+            if (row < N - 1 && prevDir != 3)
+            {
+                mazerun(row + 1, col, 1, score + grid[row + 1][col]); // south
+            }
+            break;
+        case 2:
+            if (col > 0 && prevDir != 0)
+            {
+                mazerun(row, col - 1, 2, score + grid[row][col - 1]); // west
+            }
+            break;
+        case 3:
+            if (row > 0 && prevDir != 1)
+            {
+                mazerun(row - 1, col, 3, score + grid[row - 1][col]); // north
+            }
+            break;
+        }
+    }
+    visited[row][col] = false;
+}
+
+/**
+ * Recursive flood fill in an N×N grid, marking reachable cells as filled.
+ * Time complexity: O(N*N) over connected region (each cell visited once).
+ * @param i row index
+ * @param j column index
+ */
+void floodfill(int i, int j)
+{
+    if (i < 0 || i >= N || j < 0 || j >= N)
+    {
+        return;
+    }
+    grid[i][j] = 1;
+    for (int k = 0; k < 4; k++)
+    {
+        switch (k)
+        {
+        case 0:
+            floodfill(i, j + 1);
+            break;
+        case 1:
+            floodfill(i + 1, j);
+            break;
+        case 2:
+            floodfill(i, j - 1);
+            break;
+        case 3:
+            floodfill(i - 1, j);
+            break;
+        }
+    }
+}
+
+/**
+ * Performs Breadth-First Search (BFS) on a graph.
+ *
+ * @param start The starting node for BFS.
+ * @param graph The adjacency list representing the graph.
+ * @param n The number of nodes in the graph.
+ */
+void bfs(int start, const vector<vector<int>> &graph, int n)
+{
+    vector<bool> visited(n, false); // To keep track of visited nodes
+    queue<int> q;                   // Queue for BFS
+    q.push(start);
+    visited[start] = true;
+
+    while (!q.empty())
+    {
+        int node = q.front();
+        q.pop();
+        // Process the node
+
+        // Explore all unvisited neighbors
+        for (int neighbor : graph[node])
+        {
+            if (!visited[neighbor])
+            {
+                visited[neighbor] = true;
+                q.push(neighbor);
+            }
+        }
+    }
+}
+
+/**
+ * Performs Depth-First Search (DFS) on a graph (recursive version).
+ *
+ * @param node The current node being explored.
+ * @param graph The adjacency list representing the graph.
+ * @param visited A boolean array to track visited nodes.
+ */
+void dfs(int node, const vector<vector<int>> &graph, vector<bool> &visited)
+{
+    visited[node] = true; // Mark the node as visited
+    // Process the node
+
+    // Explore all unvisited neighbors
+    for (int neighbor : graph[node])
+    {
+        if (!visited[neighbor])
+        {
+            dfs(neighbor, graph, visited);
+        }
+    }
+}
+
+/**
+ * Generate all permutations of arr using Heap's algorithm.
+ * Time complexity: O(n! * n) (n! permutations, each copy cost O(n) in callback).
+ * @param n number of elements (arr.size())
+ * @param arr input array
+ * @param result callback for each permutation
+ */
+void heapsAlgorithm(int n, vector<int> &arr, void (*result)(const vector<int> &))
+{
+    if (n == 1)
+    {
+        result(arr);
+        return;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        heapsAlgorithm(n - 1, arr, result);
+        if (n % 2 == 1)
+        {
+            swap(arr[0], arr[n - 1]);
+        }
+        else
+        {
+            swap(arr[i], arr[n - 1]);
+        }
+    }
+}
+
+/**
+ * Generate permutations by repeatedly calling next_permutation from sorted start.
+ * Time complexity: O(n! * n)
+ * @param arr input array (will be reordered)
+ */
+void generatePermutations(vector<int> &arr)
+{
+    do
+    {
+        // process permutation
+    } while (next_permutation(arr.begin(), arr.end()));
+}
+
+/**
+ * Check if n is prime.
+ * Time complexity: O(sqrt(n))
+ * @param n number to test
+ * @return true if prime, false otherwise
+ */
+bool isPrime(int n)
+{
+    if (n < 2)
+        return false;
+    for (int i = 2; i * i <= n; i++)
+        if (n % i == 0)
+            return false;
+    return true;
+}
+
+/**
+ * Greatest common divisor via Euclid's algorithm.
+ * Time complexity: O(log(min(a,b)))
+ * @param a first input
+ * @param b second input
+ * @return gcd(a,b)
+ */
+long gcd(long a, long b)
+{
+    long dividend = max(a, b), quotient = min(a, b), remainder = dividend % quotient;
+    while (remainder != 0)
+    {
+        dividend = quotient;
+        quotient = remainder;
+        remainder = dividend % quotient;
+    }
+    return quotient;
+}
+
+/**
+ * Least common multiple using gcd.
+ * Time complexity: O(log(min(a,b)))
+ * @param a first input
+ * @param b second input
+ * @return lcm(a,b), 0 if either is 0
+ */
+long lcm(long a, long b)
+{
+    if (a == 0 || b == 0)
+    {
+        return 0;
+    }
+    return (a / gcd(a, b)) * b;
+}
+
+/**
+ * Sieve of Eratosthenes for primes up to n.
+ * Time complexity: O(n log log n)
+ * @param n maximum value
+ * @return vector<bool> of size n+1, true at prime indices
+ */
+vector<bool> sieveOfEratosthenes(int n)
+{
+    vector<bool> isPrime(n + 1);
+    for (int i = 2; i <= n; i++)
+    {
+        isPrime[i] = true;
+    }
+    for (int i = 2; i * i <= n; i++)
+    {
+        if (isPrime[i])
+        {
+            for (int j = i * i; j <= n; j += i)
+            {
+                isPrime[j] = false;
+            }
+        }
+    }
+    return isPrime;
+}
+
+/**
+ * Binary search lower bound: smallest index i where arr[i] >= x.
+ * Time complexity: O(log n)
+ * @param arr sorted array
+ * @param x query value
+ * @return index in [0, arr.size()]
+ */
+int lowerBound(const vector<int> &arr, int x)
+{
+    int left = 0, right = arr.size();
+    while (left < right)
+    {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] < x)
+            left = mid + 1;
+        else
+            right = mid;
+    }
+    return left;
+}
+
+/**
+ * Binary search upper bound: largest index i where arr[i] <= x.
+ * Time complexity: O(log n)
+ * @param arr sorted array
+ * @param x query value
+ * @return index in [-1, arr.size()-1]
+ */
+int upperBound(const vector<int> &arr, int x)
+{
+    int left = 0, right = arr.size();
+    while (left < right)
+    {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] <= x)
+            left = mid + 1;
+        else
+            right = mid;
+    }
+    return left - 1;
+}
+```
