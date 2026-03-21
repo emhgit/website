@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { Moon, Sun, Github } from "lucide-react";
+import { Moon, Sun, Github, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <nav className="border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
@@ -61,9 +62,43 @@ export default function Navbar() {
             >
               <Github className="h-5 w-5" />
             </a>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-md hover:bg-accent transition-colors"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+          <div className="px-4 py-4 space-y-3">
+            <Link
+              href="/projects"
+              className="block text-foreground/70 hover:text-foreground transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              /projects
+            </Link>
+            <Link
+              href="/posts"
+              className="block text-foreground/70 hover:text-foreground transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              /posts
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
