@@ -1,34 +1,79 @@
+// Helper function to generate heading IDs
+const generateId = (text: string): string => {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
+};
+
 export const mdxComponents = {
-  h1: ({ children }: { children: React.ReactNode }) => (
-    <h1 className="text-4xl font-bold text-foreground mb-6 scroll-mt-24">
-      {children}
-    </h1>
-  ),
-  h2: ({ children }: { children: React.ReactNode }) => (
-    <h2 className="text-3xl font-semibold text-foreground mb-4 mt-8 scroll-mt-24">
-      {children}
-    </h2>
-  ),
-  h3: ({ children }: { children: React.ReactNode }) => (
-    <h3 className="text-2xl font-semibold text-foreground mb-3 mt-6 scroll-mt-24">
-      {children}
-    </h3>
-  ),
-  h4: ({ children }: { children: React.ReactNode }) => (
-    <h4 className="text-xl font-semibold text-foreground mb-2 mt-4 scroll-mt-24">
-      {children}
-    </h4>
-  ),
-  h5: ({ children }: { children: React.ReactNode }) => (
-    <h5 className="text-lg font-semibold text-foreground mb-2 mt-4 scroll-mt-24">
-      {children}
-    </h5>
-  ),
-  h6: ({ children }: { children: React.ReactNode }) => (
-    <h6 className="text-base font-semibold text-foreground mb-2 mt-4 scroll-mt-24">
-      {children}
-    </h6>
-  ),
+  h1: ({ children }: { children: React.ReactNode }) => {
+    const id = generateId(children?.toString() || "");
+    return (
+      <h1
+        id={id}
+        className="text-4xl font-bold text-foreground mb-6 scroll-mt-24"
+      >
+        {children}
+      </h1>
+    );
+  },
+  h2: ({ children }: { children: React.ReactNode }) => {
+    const id = generateId(children?.toString() || "");
+    return (
+      <h2
+        id={id}
+        className="text-3xl font-semibold text-foreground mb-4 mt-8 scroll-mt-24"
+      >
+        {children}
+      </h2>
+    );
+  },
+  h3: ({ children }: { children: React.ReactNode }) => {
+    const id = generateId(children?.toString() || "");
+    return (
+      <h3
+        id={id}
+        className="text-2xl font-semibold text-foreground mb-3 mt-6 scroll-mt-24"
+      >
+        {children}
+      </h3>
+    );
+  },
+  h4: ({ children }: { children: React.ReactNode }) => {
+    const id = generateId(children?.toString() || "");
+    return (
+      <h4
+        id={id}
+        className="text-xl font-semibold text-foreground mb-2 mt-4 scroll-mt-24"
+      >
+        {children}
+      </h4>
+    );
+  },
+  h5: ({ children }: { children: React.ReactNode }) => {
+    const id = generateId(children?.toString() || "");
+    return (
+      <h5
+        id={id}
+        className="text-lg font-semibold text-foreground mb-2 mt-4 scroll-mt-24"
+      >
+        {children}
+      </h5>
+    );
+  },
+  h6: ({ children }: { children: React.ReactNode }) => {
+    const id = generateId(children?.toString() || "");
+    return (
+      <h6
+        id={id}
+        className="text-base font-semibold text-foreground mb-2 mt-4 scroll-mt-24"
+      >
+        {children}
+      </h6>
+    );
+  },
   p: ({ children }: { children: React.ReactNode }) => (
     <p className="text-foreground mb-4 leading-relaxed">{children}</p>
   ),

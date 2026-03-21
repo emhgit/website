@@ -40,7 +40,7 @@ const projects: Project[] = [
   },
   {
     id: "java-lsp",
-    name: "(Coming Soon) USACO IDE Java LSP (Language Server Protocol)",
+    name: "(Coming Soon) USACO IDE Language Server Protocol",
     description: "A Language Server Protocol implementation for Java.",
     githubUrl: "https://github.com/cpinitiative/ide-lsp-modal",
     liveUrl: "https://ide.usaco.guide",
