@@ -1,8 +1,8 @@
 import Navbar from "@/components/Navbar";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import "katex/dist/katex.min.css";
 import { getPost } from "@/lib/utils";
+import "katex/dist/katex.min.css";
 
 export default async function PostPage({
   params,
