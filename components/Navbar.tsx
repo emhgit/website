@@ -22,20 +22,20 @@ export default function Navbar() {
               href="/"
               className="text-xl font-semibold text-foreground hover:text-foreground/80 transition-colors"
             >
-              Elliott
+              Elliott Harper
             </Link>
             <div className="hidden md:flex space-x-6">
               <Link
                 href="/projects"
                 className="text-foreground/70 hover:text-foreground transition-colors"
               >
-                projects
+                /projects
               </Link>
               <Link
                 href="/posts"
                 className="text-foreground/70 hover:text-foreground transition-colors"
               >
-                Posts
+                /posts
               </Link>
             </div>
           </div>
