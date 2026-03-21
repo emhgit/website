@@ -43,10 +43,10 @@ export interface PostData {
     tableOfContents: TableOfContentsItem[];
 }
 
-export async function getPost(slug: string): Promise<PostData | null> {
+export async function getPost(id: string): Promise<PostData | null> {
     try {
         const postsDirectory = path.join(process.cwd(), "posts");
-        const fullPath = path.join(postsDirectory, `${slug}.mdx`);
+        const fullPath = path.join(postsDirectory, `${id}.mdx`);
 
         if (!fs.existsSync(fullPath)) {
             return null;
@@ -72,7 +72,7 @@ export async function getPost(slug: string): Promise<PostData | null> {
         });
 
         return {
-            title: data.title || slug,
+            title: data.title || id,
             date: data.date || "",
             description: data.description || "",
             content: compiledContent,
@@ -85,7 +85,7 @@ export async function getPost(slug: string): Promise<PostData | null> {
 }
 
 export interface Post {
-    slug: string;
+    id: string;
     title: string;
     date: string;
     description: string;
@@ -99,14 +99,14 @@ export async function getPosts(): Promise<Post[]> {
         const posts = fileNames
             .filter((fileName) => fileName.endsWith(".mdx"))
             .map((fileName) => {
-                const slug = fileName.replace(/\.mdx$/, "");
+                const id = fileName.replace(/\.mdx$/, "");
                 const fullPath = path.join(postsDirectory, fileName);
                 const fileContents = fs.readFileSync(fullPath, "utf8");
                 const { data } = matter(fileContents);
 
                 return {
-                    slug,
-                    title: data.title || slug,
+                    id,
+                    title: data.title || id,
                     date: data.date || "",
                     description: data.description || "",
                 };

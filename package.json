@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "check-ts-errors": "tsc --noEmit"
+    "check-ts-errors": "tsc --noEmit",
+    "clean": "rm -rf .next"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",

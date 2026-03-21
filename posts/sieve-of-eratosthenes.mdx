@@ -1,0 +1,72 @@
+---
+id: "sieve-of-eratosthenes"
+title: "Sieve of Eratosthenes"
+date: "03/21/2026"
+description: "Explanation of the Sieve of Eratosthenes algorithm"
+---
+
+# Sieve of Eratosthenes
+
+I first encountered the Sieve of Eratosthenes while reading an editorial to a competitive programming problem. The problem required me to be able to quickly determine prime numbers, and I kept trying to use the naive approach:
+
+```cpp
+bool isPrime(int n)
+{
+    if (n < 2)
+        return false;
+    for (int i = 2; i * i <= n; i++)
+        if (n % i == 0)
+            return false;
+    return true;
+}
+```
+
+After around an hour of being stuck, and having never seen the Sieve before, I actually smiled when I saw the editorial use it; I never even considered something so simple (not to imply that the algorithm is easy to spot at first glance).
+
+Since then, I've read _the Art of Problem Solving: Introduction to Number Theory_ textbook by Mathew Crawford, and I've made sure to keep the algorithm in my utility functions.
+
+## Algorithm Description
+
+The algorithm for the Sieve is as follows:
+
+Let $N$ be the maximum number that primes will be generated up to.
+
+1. Set 0 and 1 to not prime
+2. Set every number $n \in [2, N]$ to prime
+3. Iterate from $i = 2$ to $N$:
+
+- if the current iteration $i$ is a prime number, then set every multiple of $i$ up to $n$ as not prime
+
+With a time complexity of $\mathcal{O}(N \log{\log{N}})$, this algorithm efficiently generates prime numbers (see [this](https://www.geeksforgeeks.org/dsa/how-is-the-time-complexity-of-sieve-of-eratosthenes-is-nloglogn/) for a proof).
+
+![Animation of the Sieve of Eratosthenes](https://upload.wikimedia.org/wikipedia/commons/9/94/Animation_Sieve_of_Eratosth.gif)
+
+GIF source: [Wikipedia](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
+
+```cpp
+/**
+ * Sieve of Eratosthenes for primes up to n.
+ * Time complexity: O(n log log n)
+ * @param n maximum value
+ * @return vector<bool> of size n+1, true at prime indices
+ */
+vector<bool> sieveOfEratosthenes(int n)
+{
+    vector<bool> isPrime(n + 1);
+    for (int i = 2; i <= n; i++)
+    {
+        isPrime[i] = true;
+    }
+    for (int i = 2; i * i <= n; i++)
+    {
+        if (isPrime[i])
+        {
+            for (int j = i * i; j <= n; j += i)
+            {
+                isPrime[j] = false;
+            }
+        }
+    }
+    return isPrime;
+}
+```

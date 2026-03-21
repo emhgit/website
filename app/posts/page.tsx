@@ -17,10 +17,10 @@ export default async function PostsPage() {
           <div className="space-y-8">
             {posts.map((post) => (
               <article
-                key={post.slug}
+                key={post.id}
                 className="border-b border-border pb-8 last:border-b-0"
               >
-                <Link href={`/posts/${post.slug}`} className="block group">
+                <Link href={`/posts/${post.id}`} className="block group">
                   <div className="space-y-2">
                     <h2 className="text-2xl font-semibold text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {post.title}
