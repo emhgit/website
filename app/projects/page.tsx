@@ -9,12 +9,23 @@ interface Project {
   githubUrl?: string;
   liveUrl?: string;
   imageUrl?: string;
+  tags?: string[];
 }
 
 const projects: Project[] = [
   {
     id: "1",
     name: "USACO Guide (Next.js Migration)",
+    tags: [
+      "Next.js",
+      "Gatsby",
+      "Algolia",
+      "MDX",
+      "TypeScript",
+      "Vercel",
+      "Firebase",
+      "SQLite",
+    ],
     description:
       "Migrated the USACO Guide website from Gatsby to Next.js to improve performance and developer experience.",
     githubUrl:
@@ -25,6 +36,7 @@ const projects: Project[] = [
   {
     id: "Economic Data Visualizer",
     name: "Economic Data Visualizer",
+    tags: ["Vanilla JavaScript", "Chart.js", "World Bank API", "Cloudflare"],
     description:
       "Fetches real-time economic indicators from the World Bank API and allows users to generate visual dashboards using Chart.js.",
     githubUrl: "https://github.com/emhgit/economic-data-visualizer",
@@ -34,13 +46,15 @@ const projects: Project[] = [
   {
     id: "cp",
     name: "Competitive Programming",
+    tags: ["C++", "Java", "Maven"],
     description:
       "A collection of competitive programming problems and solutions in C++ and Java.",
     githubUrl: "https://github.com/emhgit/competitive-programming",
   },
   {
     id: "java-lsp",
-    name: "(Coming Soon) USACO IDE Language Server Protocol",
+    name: "(Coming Soon) USACO IDE Java Language Server Protocol",
+    tags: ["Python", "FastAPI", "JDTLS", "Modal", "Monaco Editor", "Docker"],
     description: "A Language Server Protocol implementation for Java.",
     githubUrl: "https://github.com/cpinitiative/ide-lsp-modal",
     liveUrl: "https://ide.usaco.guide",
@@ -49,6 +63,7 @@ const projects: Project[] = [
   {
     id: "personal-website",
     name: "Personal Website (This)",
+    tags: ["Next.js", "Tailwind CSS", "Vercel"],
     description:
       "A personal website built with Next.js and Tailwind CSS, deployed with Vercel.",
     githubUrl: "https://github.com/emhgit/website",
@@ -83,6 +98,20 @@ export default function ProjectsPage() {
               <h3 className="text-xl font-semibold text-foreground mb-2">
                 {project.name}
               </h3>
+
+              {project.tags && (
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs text-muted-foreground">Tags:</span>
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
 
               <p className="text-muted-foreground mb-4">
                 {project.description}

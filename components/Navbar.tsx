@@ -18,7 +18,7 @@ export default function Navbar() {
               href="/"
               className="text-xl font-semibold text-foreground hover:text-foreground/80 transition-colors"
             >
-              Elliott Harper
+              Elliott M. Harper
             </Link>
             <div className="hidden md:flex space-x-6">
               <Link

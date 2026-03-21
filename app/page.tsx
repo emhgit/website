@@ -7,11 +7,11 @@ export default function Home() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="text-center">
           <h1 className="text-5xl font-bold text-foreground mb-6">
-            Elliott Harper
+            Elliott M. Harper
           </h1>
           <div className="space-y-2 text-lg text-muted-foreground mb-8">
             <p>Computer science enthusiast and developer</p>
-            <p>Junior in high school from Texas</p>
+            <p>Junior in high school from Texas (Class of 2027)</p>
           </div>
           <p className="text-foreground mb-8">
             Checkout my{" "}

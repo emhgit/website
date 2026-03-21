@@ -3,7 +3,7 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Elliott Harper",
+  title: "Elliott M. Harper",
   description: "Computer science enthusiast and developer",
 };
 
