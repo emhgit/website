@@ -42,6 +42,7 @@ export default function Navbar() {
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 className="p-2 rounded-md hover:bg-accent transition-colors"
                 aria-label="Toggle theme"
+                suppressHydrationWarning
               >
                 {theme === "dark" ? (
                   <Sun className="h-5 w-5" />

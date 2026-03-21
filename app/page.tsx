@@ -10,7 +10,7 @@ export default function Home() {
             Elliott Harper
           </h1>
           <div className="space-y-2 text-lg text-muted-foreground mb-8">
-            <p>Computer science enthusiast</p>
+            <p>Computer science enthusiast and developer</p>
             <p>Junior in high school from Texas</p>
           </div>
           <p className="text-foreground mb-8">
