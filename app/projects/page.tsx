@@ -46,6 +46,14 @@ const projects: Project[] = [
     liveUrl: "https://ide.usaco.guide",
     imageUrl: "/java-lsp-ss.png",
   },
+  {
+    id: "personal-website",
+    name: "Personal Website (This)",
+    description:
+      "A personal website built with Next.js and Tailwind CSS, deployed with Vercel.",
+    githubUrl: "https://github.com/emhgit/website",
+    liveUrl: "https://elliottmharper.dev",
+  },
 ];
 
 export default function ProjectsPage() {

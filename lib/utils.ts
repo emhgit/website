@@ -79,6 +79,7 @@ export async function getPost(slug: string): Promise<PostData | null> {
             tableOfContents,
         };
     } catch (error) {
+        console.error("Error getting post:", error);
         return null;
     }
 }
@@ -91,25 +92,30 @@ export interface Post {
 }
 
 export async function getPosts(): Promise<Post[]> {
-    const postsDirectory = path.join(process.cwd(), "posts");
-    const fileNames = fs.readdirSync(postsDirectory);
+    try {
+        const postsDirectory = path.join(process.cwd(), "posts");
+        const fileNames = fs.readdirSync(postsDirectory);
 
-    const posts = fileNames
-        .filter((fileName) => fileName.endsWith(".mdx"))
-        .map((fileName) => {
-            const slug = fileName.replace(/\.mdx$/, "");
-            const fullPath = path.join(postsDirectory, fileName);
-            const fileContents = fs.readFileSync(fullPath, "utf8");
-            const { data } = matter(fileContents);
+        const posts = fileNames
+            .filter((fileName) => fileName.endsWith(".mdx"))
+            .map((fileName) => {
+                const slug = fileName.replace(/\.mdx$/, "");
+                const fullPath = path.join(postsDirectory, fileName);
+                const fileContents = fs.readFileSync(fullPath, "utf8");
+                const { data } = matter(fileContents);
 
-            return {
-                slug,
-                title: data.title || slug,
-                date: data.date || "",
-                description: data.description || "",
-            };
-        })
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                return {
+                    slug,
+                    title: data.title || slug,
+                    date: data.date || "",
+                    description: data.description || "",
+                };
+            })
+            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-    return posts;
+        return posts;
+    } catch (error) {
+        console.error("Error getting posts:", error);
+        return [];
+    }
 }

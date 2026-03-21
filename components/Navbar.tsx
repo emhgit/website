@@ -3,15 +3,11 @@
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Moon, Sun, Github } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const [mounted] = useState(true);
 
   return (
     <nav className="border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">

@@ -23,7 +23,7 @@ export default function Home() {
             >
               GitHub
             </a>{" "}
-            to see projects I'm working on.
+            to see projects I am working on.
           </p>
         </div>
       </main>
