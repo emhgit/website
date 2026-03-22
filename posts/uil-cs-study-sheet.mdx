@@ -1,0 +1,839 @@
+---
+id: "uil-cs-study-sheet"
+title: "UIL CS Study Sheet"
+date: "03/21/2026"
+description: "Study sheet for UIL Computer Science"
+---
+
+# UIL CS Written Test Notes
+
+https://www.uiltexas.org/files/academics/UILCS-JavaTopicList2526.pdf
+
+### 1 Number Systems
+
+#### A Converting from decimal to any base $b$
+
+**Method:** repeated division (for integers).
+
+To convert decimal $N$ to base $b$:
+
+1. Divide $N$ by $b$.
+2. Record the remainder.
+3. Replace $N$ with the quotient.
+4. Repeat until the quotient is $0$.
+5. Read remainders bottom to top.
+
+**Example:** convert $156_{10}$ to base $4$
+
+- $156 \div 4 = 39$ remainder $0$
+- $39 \div 4 = 9$ remainder $3$
+- $9 \div 4 = 2$ remainder $1$
+- $2 \div 4 = 0$ remainder $2$
+
+$156_{10} = 2130_{4}$
+
+---
+
+#### B Shortcuts between binary, hex, and decimal
+
+##### Binary $\leftrightarrow$ Decimal
+
+Binary is base $2$, so each bit represents a power of $2$.
+
+**Example:** $101101_2$
+
+$$
+1\cdot2^{5} + 0\cdot2^{4} + 1\cdot2^{3} + 1\cdot2^{2} + 0\cdot2^{1} + 1\cdot2^{0} = 32 + 8 + 4 + 1 = 45
+$$
+
+So $101101_2 = 45_{10}$
+
+##### Hex $\leftrightarrow$ Decimal
+
+Hex is base $16$.
+
+Digits: $0$-$9$, $A=10$, $B=11$, $C=12$, $D=13$, $E=14$, $F=15$.
+
+**Example:** $2AF_{16}$
+
+$$
+2\cdot16^{2} + 10\cdot16^{1} + 15\cdot16^{0} = 512 + 160 + 15 = 687
+$$
+
+So $2AF_{16} = 687_{10}$
+
+##### Binary $\leftrightarrow$ Hex shortcut (VERY common on UIL)
+
+Group bits in chunks of $4$ from the right.
+
+**Example:** $110101111001_2$
+
+Group: $1101\;0111\;1001$
+
+Convert each nibble:
+
+- $1101 = D$
+- $0111 = 7$
+- $1001 = 9$
+
+So: $110101111001_2 = D79_{16}$
+
+---
+
+#### C Arithmetic in a base other than decimal
+
+**Example:** addition in base $4$
+
+$$
+\begin{array}{r}
+  312_{4} \\
++ 233_{4} \\
+\hline
+\end{array}
+$$
+
+Work right to left:
+
+- $2 + 3 = 5$. In base $4$, $5 = 11_{4}$. Write $1$ carry $1$.
+- $1 + 3 + 3 = 7$. In base $4$, $7 = 13_{4}$. Write $3$ carry $1$.
+- $3 + 2 + 1 = 6$. In base $4$, $6 = 12_{4}$. Write $2$ carry $1$.
+- carry $1$
+
+Answer: $312_{4} + 233_{4} = 12131_{4}$
+
+**Note:** Understand positional values (e.g., $2^{n}$, $16^{n}$).
+
+---
+
+### 2 printf (Java)
+
+Common formatting codes
+
+Use: `System.out.printf("format", values...);`
+
+| Code   | Meaning              | Example |
+| :----- | :------------------- | :------ |
+| `%d`   | integer              | `%d`    |
+| `%f`   | floating point       | `%f`    |
+| `%.nf` | float w/ n decimals  | `%.2f`  |
+| `%s`   | string               | `%s`    |
+| `%c`   | char                 | `%c`    |
+| `%b`   | boolean              | `%b`    |
+| `%n`   | newline              | `%n`    |
+| `%%`   | literal percent sign | `%%`    |
+
+#### Width + alignment
+
+- `%10d` width $10$ right-aligned
+- `%-10d` width $10$ left-aligned
+- `%05d` pad with zeros
+
+**Examples**
+
+```java
+int x = 42;
+double pi = Math.PI;
+String name = "UIL";
+
+System.out.printf("x=%d%n", x);            // x=42
+System.out.printf("pi=%6.3f%n", pi);       // pi= 3.142
+System.out.printf("%10d%n", x);            // [       42]
+System.out.printf("%-10s%n", name);        // [UIL      ]
+System.out.printf("%05d%n", x);            // 00042
+System.out.printf("100%% done%n");         // 100% done
+```
+
+---
+
+### 3 Operator Precedence
+
+1. Parentheses: `()`
+2. Unary: `!`, `++`, `--`, unary `+` `-`
+3. Multiply: `*` `/` `%`
+4. Add: `+` `-`
+5. Shift: `<<` `>>` `>>>`
+6. Relational: `<` `<=` `>` `>=` `instanceof`
+7. Equality: `==` `!=`
+8. Bitwise: `&` then `^` then `|`
+9. Logical: `&&` then `||`
+10. Ternary: `? :`
+11. Assignment: `=` `+=` `-=` ...
+
+**Memorization trick:** "PUMA SREBLTA"
+
+- Parentheses
+- Unary
+- Note: postfix operators return the old value of a variable and update the variable immediately
+- Multiplicative
+- Additive
+- Shift
+- Relational
+- Equality
+
+---
+
+### 4 Bitwise Operations (with a full example)
+
+**Operators:**
+
+- `&` AND
+- `|` OR
+- `^` XOR
+- `~` NOT
+- `<<` left shift
+- `>>` arithmetic right shift
+- `>>>` logical right shift
+
+#### Example expression
+
+Compute:
+
+```java
+int ans = (13 & 6) ^ (9 | 2);
+```
+
+Convert to binary:
+
+$$
+13 = 1101,\quad 6 = 0110,\quad 9 = 1001,\quad 2 = 0010
+$$
+
+**Step 1:** $13 \& 6$
+
+```
+1101
+0110
+----
+0100 = 4
+```
+
+**Step 2:** $9 | 2$
+
+```
+1001
+0010
+----
+1011 = 11
+```
+
+**Step 3:** XOR: $4 \^ 11$
+
+```
+0100
+1011
+----
+1111 = 15
+```
+
+So: `ans = 15`
+
+#### Bit shifts (with examples)
+
+- `x << k`: shift left by $k$ bits (multiply by $2^{k}$, if no overflow)
+- `x >> k`: arithmetic right shift by $k$ bits (divide by $2^{k}$ rounding toward $-\infty$, preserves sign bit)
+- `x >>> k`: logical right shift by $k$ bits (fills with $0$s, ignores sign)
+
+**Examples (binary)**
+
+Let $x = 13$:
+
+$$
+13 = 00001101
+$$
+
+**Left shift**
+
+$$
+13 << 2 = 00110100 = 52 \quad (13 \times 4)
+$$
+
+**Arithmetic right shift**
+
+$$
+13 >> 2 = 00000011 = 3 \quad (13 / 4)
+$$
+
+**Logical right shift**
+
+$13 >>> 2 = 3$ (same as $>>$ here because positive)
+
+#### Negative shift example (important)
+
+Use an 8-bit view for intuition.
+
+Let $-8$ in 8-bit two's complement:
+
+$-8 = 11111000$ (in 8 bits)
+
+**Arithmetic right shift**
+
+- $-8 \gg 1$ : $11111000 \gg 1 \rightarrow 11111100$
+- $11111100$ is $-4$
+
+So $-8 \gg 1 == -4$
+
+**Logical right shift**
+
+- $-8 \gg 1$ : $11111000 \gg 1 \rightarrow 01111100$
+- which is $+124$ in unsigned interpretation
+
+So $>>>$ can turn negatives into huge positives.
+
+---
+
+#### Signed bits, one's complement, two's complement
+
+**Sign bit**
+
+In signed binary representations, the leftmost bit indicates sign:
+
+- $0 =$ nonnegative
+- $1 =$ negative (in two's complement)
+
+**One's complement**
+
+To negate: flip all bits
+
+Example in $8$ bits:
+
+$+5 = 00000101$
+
+$-5$ (one's complement) $= 11111010$
+
+Problem: there are two zeros: $+0 = 00000000$, $-0 = 11111111$
+
+One's complement is mainly a historical concept; Java uses two's complement.
+
+**Two's complement (what Java uses)**
+
+To negate:
+
+1. flip all bits
+2. add $1$
+
+Example:
+
+$+5 = 00000101$
+
+invert: $11111010$
+
+$+1$
+
+$11111011 = -5$
+
+**Why it matters**
+
+- single representation for $0$
+- subtraction becomes addition: $a - b = a + (\text{two's complement of } b)$
+- addition hardware is simpler
+
+**Range in two's complement**
+
+For $n$ bits:
+
+$$
+\min = -2^{n-1},\quad \max = 2^{n-1} - 1
+$$
+
+Example $8$-bit signed:
+
+$$
+\min = -128,\quad \max = +127
+$$
+
+---
+
+### 5 Boolean algebra identities + symbols
+
+**Symbols you asked about**
+
+- Circle-plus: $\oplus$ means XOR
+  - true when inputs differ
+- Overline: $\overline{A}$ means NOT A (complement)
+  - same as `!A`
+
+**Core identities (memorize)**
+
+Let $+ =$ OR, $\cdot =$ AND, overline $=$ NOT.
+
+**Identity laws**
+
+$$
+A + 0 = A,\quad A \cdot 1 = A
+$$
+
+**Domination**
+
+$$
+A + 1 = 1,\quad A \cdot 0 = 0
+$$
+
+**Idempotent**
+
+$$
+A + A = A,\quad A \cdot A = A
+$$
+
+**Complement**
+
+$$
+A + \overline{A} = 1,\quad A \cdot \overline{A} = 0
+$$
+
+**Double negation**
+
+$$
+\overline{\overline{A}} = A
+$$
+
+**Commutative**
+
+$$
+A + B = B + A,\quad A B = B A
+$$
+
+**Associative**
+
+$$
+(A + B) + C = A + (B + C),\quad (AB)C = A(BC)
+$$
+
+**Distributive**
+
+$$
+A(B + C) = AB + AC,\quad A + BC = (A + B)(A + C)
+$$
+
+**De Morgan's**
+
+$$
+\overline{A + B} = \overline{A} \cdot \overline{B},\quad \overline{AB} = \overline{A} + \overline{B}
+$$
+
+**XOR facts (UIL loves these)**
+
+- $A \oplus A = 0$
+- $A \oplus 0 = A$
+- $A \oplus 1 = \overline{A}$
+- XOR is associative/commutative
+
+[https://www.uilexas.org/files/academics/UILCS-DigitalSymbols.pdf](https://www.uilexas.org/files/academics/UILCS-DigitalSymbols.pdf)
+
+---
+
+### 6 Memory Allocated for Java Data Types
+
+Primitive types (fixed sizes)
+
+| Type    | Bits          | Bytes | Notes                                    |
+| :------ | :------------ | :---- | :--------------------------------------- |
+| boolean | JVM-dependent |       | usually 1 byte in arrays, not guaranteed |
+| byte    | 8             | 1     | -128..127                                |
+| short   | 16            | 2     |                                          |
+| char    | 16            | 2     | unsigned 0..65535                        |
+| int     | 32            | 4     |                                          |
+| float   | 32            | 4     | IEEE 754                                 |
+| long    | 64            | 8     |                                          |
+| double  | 64            | 8     | IEEE 754                                 |
+
+**Reference types**
+
+`String`, arrays, objects, collections store:
+
+- a reference in the variable
+- actual object is on the heap
+
+Reference size depends on JVM (commonly $4$ bytes with compressed oops, or $8$ bytes). UIL questions typically focus on primitive sizes.
+
+---
+
+### 7 Regex Patterns (most common + how used)
+
+In Java:
+
+- `s.matches(regex)` must match entire string
+- Use `Pattern` and `Matcher` for searching
+
+```java
+String s = "insert regex pattern here";
+String t = "match me to a regex";
+Pattern pattern = Pattern.compile(s);
+Matcher matcher = pattern.matcher(t);
+```
+
+**Common patterns**
+
+| Pattern    | Meaning                                                   |
+| ---------- | --------------------------------------------------------- |
+| `.`        | any char                                                  |
+| `\d`       | digit                                                     |
+| `\D`       | not digit                                                 |
+| `\w`       | word char `[A-Za-z0-9_]`                                  |
+| `\W`       | not word                                                  |
+| `\s`       | whitespace                                                |
+| `\S`       | not whitespace                                            |
+| `\b`       | word boundary (position between `\w` and `\W`)            |
+| `\|`       | alternation (matches before and after, like a logical OR) |
+| `(?:...)`  | non-capturing group                                       |
+| `(?=...)`  | positive lookahead                                        |
+| `(?!...)`  | negative lookahead                                        |
+| `(?<=...)` | positive lookbehind                                       |
+| `(?<!...)` | negative lookbehind                                       |
+
+**Note:** `?` after a quantifier (`*`, `+`, `?`) is non-greedy/lazy.
+
+**Examples**
+
+```java
+"12345".matches("\\d+");       // true
+"12a45".matches("\\d+");       // false
+
+"abc".matches("[a-z]{3}");     // true
+"ABC".matches("[a-z]{3}");     // false
+
+"hello@gmail.com".matches("\\w+@\\w+\\.com"); // true-ish (simplified)
+
+"   ".matches("\\s+");         // true
+```
+
+---
+
+### 8 Recursion Tracing (example)
+
+```java
+static int f(int n) {
+    if (n <= 1) return 1;
+    return n * f(n - 2);
+}
+```
+
+Trace $f(7)$:
+
+$$
+\begin{aligned}
+f(7) &= 7 \cdot f(5) \\
+f(5) &= 5 \cdot f(3) \\
+f(3) &= 3 \cdot f(1) \\
+f(1) &= 1
+\end{aligned}
+$$
+
+Back-substitute:
+
+$$
+\begin{aligned}
+f(3) &= 3 \cdot 1 = 3 \\
+f(5) &= 5 \cdot 3 = 15 \\
+f(7) &= 7 \cdot 15 = 105
+\end{aligned}
+$$
+
+---
+
+### 9 Tracing a Nested Loop (example)
+
+```java
+int count = 0;
+for (int i = 1; i <= 3; i++) {
+    for (int j = 1; j <= i; j++) {
+        count += i + j;
+    }
+}
+System.out.println(count);
+```
+
+Trace:
+
+- $i=1$: $j=1 \rightarrow$ add $(1+1)=2 \rightarrow$ count=2
+- $i=2$: $j=1 \rightarrow$ add $3 \rightarrow$ count=5
+  $j=2 \rightarrow$ add $4 \rightarrow$ count=9
+- $i=3$: $j=1 \rightarrow$ add $4 \rightarrow$ count=13
+  $j=2 \rightarrow$ add $5 \rightarrow$ count=18
+  $j=3 \rightarrow$ add $6 \rightarrow$ count=24
+
+Output: $24$
+
+---
+
+### 10 Math.random() and Random
+
+**Math.random()**
+
+Returns double in $[0.0, 1.0)$
+
+Common patterns:
+
+```java
+int x = (int)(Math.random() * 10);          // 0..9
+int y = (int)(Math.random() * 6) + 1;       // 1..6
+int z = (int)(Math.random() * (b - a + 1)) + a; // a..b
+```
+
+**Random class**
+
+```java
+Random r = new Random(); // or new Random(seed)
+int a = r.nextInt(10);       // 0..9
+int b = r.nextInt(6) + 1;    // 1..6
+double d = r.nextDouble();   // [0.0, 1.0)
+boolean ok = r.nextBoolean();
+```
+
+---
+
+### 11 OOP: Method Dispatch + Generics Instancing Errors
+
+#### A Method dispatch (dynamic dispatch)
+
+In Java:
+
+- Overloading resolved at compile time
+- Overriding resolved at runtime based on actual object type
+
+**Example:**
+
+```java
+class A {
+    void f() { System.out.println("A"); }
+}
+class B extends A {
+    @Override void f() { System.out.println("B"); }
+}
+
+A obj = new B();
+obj.f(); // prints "B"
+```
+
+Even though the variable type is `A`, the object is `B`, so `B.f()` runs.
+
+#### B Generics: instancing examples (error vs not)
+
+**Example that causes an error**
+
+```java
+List<int> x = new ArrayList<int>(); // ERROR
+```
+
+**Correct:**
+
+```java
+List<Integer> x = new ArrayList<>();
+```
+
+**Another common generics error (invariance)**
+
+```java
+List<Integer> a = new ArrayList<>();
+List<Number> b = a; // ERROR
+```
+
+Even though `Integer` is a `Number`, `List<Integer>` is NOT a `List<Number>`.
+
+**Fix using wildcards:**
+
+```java
+List<? extends Number> b = a; // OK (read-only-ish)
+```
+
+**Example that is OK**
+
+```java
+List<Number> nums = new ArrayList<>();
+nums.add(3);    // Integer auto-boxed
+nums.add(2.5);  // Double
+```
+
+Auto-unboxing occurs whenever the compiler sees an object of type wrapper class passed into a primitive type. The `Double.doubleValue()` and `Integer.intValue()` methods are used for manual auto-unboxing.
+
+---
+
+### 12 Pass-By-Value in Java
+
+Java always passes primitive values by value. For objects, reference copies are passed. Assigning to a parameter doesn't change the original reference.
+
+---
+
+### 13 Exceptions/Errors
+
+- Recognize common runtime errors (e.g., `NullPointerException`, `NumberFormatException`, array index errors).
+- Checked exceptions require `try/catch` or `throws` declaration.
+- The compiler only checks syntax and type safety; actual variable values exist at run time.
+- Local, uninitialized variables will throw a compiler (syntax) error if you attempt to use them. On the other hand, class-level variables (both instance fields and static) are provided a default value by the compiler, and thus do not throw errors.
+  - Numeric default values (e.g., short, int, long, float, double): $0$, $0.0$, or $0.0f$
+  - Boolean default value: `false`
+  - Char default value: `'\u0000'`
+  - Reference type default value (e.g., String): `null`
+
+---
+
+### 14 Collections & Common Methods
+
+**List / ArrayList**
+
+- Add/insert: `add(E)` / `add(index, E)`.
+- Access: `get(index)`.
+- Remove: `remove(index)` or `remove(Object)`.
+- Size: `size()`.
+- Example: Removing and adding values changes order.
+
+**Stack**
+
+- Push: `push(E)` or `add(E)` on a Stack.
+- Pop: `pop()`.
+- Peek: `peek()` returns top.
+- LIFO behavior.
+
+**Collections Utility Methods**
+
+- Rotate lists: `Collections.rotate(list, k)`.
+- Remove by condition: `removeIf(predicate)`.
+
+**Maps and Sets**
+
+- Basic behaviors: `HashMap`, `TreeMap`, `HashSet`, `TreeSet`.
+- Key methods: `put(key, value)`, `get(key)`, `containsKey(key)`, `contains()`, `size()`.
+
+---
+
+### 15 Arrays & Strings
+
+Arrays: traversal, indexing, mutation. Multi-dimensional arrays.
+
+Strings: `substring`, `charAt`, concatenation. String to char array: `"abc".toCharArray()`.
+
+---
+
+### 16 Trees & Graphs
+
+Binary Search Trees: Insert order affects shape. Tree properties: internal nodes vs leaves, diameter. Complexity: worst-case search in unbalanced BST is $O(n)$.
+
+---
+
+### 17 Postfix notation (Reverse Polish) with example
+
+[https://www.uilexas.org/files/academics/UILCS-PolishNotation-Examples.pdf](https://www.uilexas.org/files/academics/UILCS-PolishNotation-Examples.pdf)
+
+**Definition**
+
+Postfix places operators after operands.
+
+- Infix: $3 + 4$
+- Postfix: $3\ 4\ +$
+
+**Evaluate using a stack:**
+
+- push numbers
+- when operator appears: pop two operands, apply, push result
+
+**Example**
+
+Evaluate postfix: $5\ 2\ 3\ *\ +\ 4\ -$
+
+Steps:
+
+- push $5 \rightarrow [5]$
+- push $2 \rightarrow [5,2]$
+- push $3 \rightarrow [5,2,3]$
+- $*$: pop $3$ and $2 \rightarrow 2*3=6 \rightarrow [5,6]$
+- $+$: pop $6$ and $5 \rightarrow 5+6=11 \rightarrow [11]$
+- push $4 \rightarrow [11,4]$
+- $-$: pop $4$ and $11 \rightarrow 11-4=7 \rightarrow [7]$
+
+Answer: $7$
+
+---
+
+### 18 Algorithms/Complexity
+
+- Understand basic time complexity (e.g., BFS, simple loops).
+- Recognize inefficiencies (e.g., nested loops $\rightarrow O(n^2)$).
+- Recognize linear vs logarithmic vs polynomial behavior.
+
+---
+
+### 19 Miscellaneous
+
+- String methods: `length()`, `substring()`, `split()`, `toLowerCase()`, `matches()`.
+- Math class: `ceil`, `floor`, `pow`, `min`, `max`.
+- Scanner: input parsing: `nextInt()`, `nextLine()`.
+
+---
+
+### Tips for Success
+
+- Practice tracing code line by line.
+- Use small examples to test logic (especially for loops, recursion, and bitwise).
+- Memorize operator precedence and common collection method behaviors.
+- Work past problems from all packet levels (Invitational, District, Region, State).
+
+---
+
+### Other important subjects to know (UIL-relevant)
+
+**1) Integer division and modulo (VERY common traps)**
+
+- $7 / 2 == 3$
+- $7 \% 2 == 1$
+- $-7 / 2 == -3$ in Java (truncates toward $0$)
+- $-7 \% 2 == -1$
+
+**2) Type casting + promotion**
+
+- `char` participates in arithmetic as an integer code point
+- expressions with mixed types promote:
+  - `int + double -> double`
+- integer overflow wraps around in Java (two's complement)
+
+**Example:**
+
+```java
+int x = Integer.MAX_VALUE;
+System.out.println(x + 1); // wraps to negative
+```
+
+**3) String pitfalls**
+
+- `==` compares references, not contents
+- use `.equals(...)`
+
+```java
+String a = new String("hi");
+String b = new String("hi");
+System.out.println(a == b);        // false
+System.out.println(a.equals(b));   // true
+```
+
+**4) Arrays vs ArrayList**
+
+- arrays fixed size, `.length`
+- `ArrayList` dynamic size, `.size()`
+
+**5) Common off-by-one errors in loops**
+
+$i < n$ vs $i <= n$ nested loops counting iterations is a frequent UIL question.
+
+**6) Recursion: must identify base case + number of calls**
+
+UIL often asks output and/or call depth.
+
+**7) Sorting/searching concepts**
+
+Know basics:
+
+- linear search: $O(n)$
+- binary search: $O(\log n)$ (requires sorted data)
+- typical sorting: $O(n \log n)$
+
+---
+
+### Practice
+
+[https://www.uilexas.org/academics/page/2025-high-school-academic-study-materials](https://www.uilexas.org/academics/page/2025-high-school-academic-study-materials)
+
+[https://www.cs.utexas.edu/~scottm/uil/2008/practice2008.pdf](https://www.cs.utexas.edu/~scottm/uil/2008/practice2008.pdf)
+
+[https://www.uilexas.org/files/academics/1-CompSci_2017_District-Test.pdf](https://www.uilexas.org/files/academics/1-CompSci_2017_District-Test.pdf)
+
+[https://www.cs.utexas.edu/~scottm/uil/practiceMaterials.html](https://www.cs.utexas.edu/~scottm/uil/practiceMaterials.html)
+
+[https://www.apluscompsci.com/aplus_Sample_Test_2.pdf](https://www.apluscompsci.com/aplus_Sample_Test_2.pdf)
