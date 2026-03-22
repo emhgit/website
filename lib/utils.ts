@@ -5,6 +5,8 @@ import path from "path";
 import fs from "fs";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
+import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
 
 export interface TableOfContentsItem {
     id: string;
@@ -64,8 +66,8 @@ export async function getPost(id: string): Promise<PostData | null> {
             options: {
                 parseFrontmatter: true,
                 mdxOptions: {
-                    remarkPlugins: [remarkMath],
-                    rehypePlugins: [rehypeKatex],
+                    remarkPlugins: [remarkMath, remarkGfm],
+                    rehypePlugins: [rehypeKatex, rehypeSlug],
                 },
             },
             components: mdxComponents,

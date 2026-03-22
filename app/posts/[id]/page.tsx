@@ -2,7 +2,6 @@ import Navbar from "@/components/Navbar";
 import { TOC } from "@/components/TOC";
 import { notFound } from "next/navigation";
 import { getPost } from "@/lib/utils";
-import "katex/dist/katex.min.css";
 import type { Metadata } from "next";
 
 export async function generateMetadata({

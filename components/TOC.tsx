@@ -1,6 +1,7 @@
 "use client";
 
 import { TableOfContentsItem } from "@/lib/utils";
+import { InlineMath } from "react-katex";
 
 interface TOCProps {
   toc: TableOfContentsItem[];
@@ -12,10 +13,30 @@ export function TOC({ toc }: TOCProps) {
     href: string,
   ) => {
     e.preventDefault();
-    const element = document.querySelector(href);
+    const element = document.getElementById(href.slice(1));
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      console.log(
+        "TOC: Available heading IDs:",
+        Array.from(document.querySelectorAll("h1, h2, h3, h4, h5, h6"))
+          .map((h) => h.id)
+          .filter((id) => id),
+      );
     }
+  };
+
+  // Parse and render text with LaTeX
+  const renderTextWithMath = (text: string) => {
+    const parts = text.split(/(\$[^$]+\$)/g);
+
+    return parts.map((part, index) => {
+      if (part.startsWith("$") && part.endsWith("$")) {
+        const mathContent = part.slice(1, -1);
+        return <InlineMath key={index} math={mathContent} />;
+      }
+      return <span key={index}>{part}</span>;
+    });
   };
 
   return (
@@ -32,10 +53,18 @@ export function TOC({ toc }: TOCProps) {
                 href={`#${item.id}`}
                 onClick={(e) => handleClick(e, `#${item.id}`)}
                 className={`block text-sm text-muted-foreground hover:text-foreground transition-colors ${
-                  item.level > 2 ? "ml-4" : item.level > 1 ? "ml-2" : ""
+                  item.level > 4
+                    ? "ml-8"
+                    : item.level > 3
+                      ? "ml-6"
+                      : item.level > 2
+                        ? "ml-4"
+                        : item.level > 1
+                          ? "ml-2"
+                          : ""
                 }`}
               >
-                {item.title}
+                {renderTextWithMath(item.title)}
               </a>
             ))}
           </nav>
