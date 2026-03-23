@@ -1,0 +1,267 @@
+---
+id: "uil-cs-bitwise-boolean"
+title: "UIL CS: Bitwise Operations & Boolean Algebra"
+date: "03/22/2026"
+description: "Bitwise operations and boolean algebra for UIL Computer Science - AND, OR, XOR, shifts, identities, and De Morgan's laws"
+tags: ["computer science", "programming", "UIL", "bitwise", "boolean algebra"]
+---
+
+# UIL CS: Bitwise Operations & Boolean Algebra
+
+> This is part of the UIL CS study series. See also:
+>
+> - [Number Systems](/posts/uil-cs-number-systems)
+> - [Java Fundamentals](/posts/uil-cs-java-fundamentals)
+> - [Recursion & Loops](/posts/uil-cs-recursion-loops)
+> - [OOP & Generics](/posts/uil-cs-oop-generics)
+> - [Collections & Algorithms](/posts/uil-cs-collections-algorithms)
+> - [Practice Resources](/posts/uil-cs-practice-resources)
+
+**Main topic list:** https://www.uiltexas.org/files/academics/UILCS-JavaTopicList2526.pdf
+
+---
+
+### 4. Bitwise Operations (with a full example)
+
+**Operators:**
+
+- `&` AND
+- `|` OR
+- `^` XOR
+- `~` NOT
+- `<<` left shift
+- `>>` arithmetic right shift
+- `>>>` logical right shift
+
+#### Example expression
+
+Compute:
+
+```java
+int ans = (13 & 6) ^ (9 | 2);
+```
+
+Convert to binary:
+
+$$
+13 = 1101,\quad 6 = 0110,\quad 9 = 1001,\quad 2 = 0010
+$$
+
+**Step 1:** $13 \& 6$
+
+```
+1101
+0110
+----
+0100 = 4
+```
+
+**Step 2:** $9 | 2$
+
+```
+1001
+0010
+----
+1011 = 11
+```
+
+**Step 3:** XOR: $4 \^ 11$
+
+```
+0100
+1011
+----
+1111 = 15
+```
+
+So: `ans = 15`
+
+#### Bit shifts (with examples)
+
+- `x << k`: shift left by $k$ bits (multiply by $2^{k}$, if no overflow)
+- `x >> k`: arithmetic right shift by $k$ bits (divide by $2^{k}$ rounding toward $-\infty$, preserves sign bit)
+- `x >>> k`: logical right shift by $k$ bits (fills with $0$s, ignores sign)
+
+**Examples (binary)**
+
+Let $x = 13$:
+
+$$
+13 = 00001101
+$$
+
+**Left shift**
+
+$$
+13 << 2 = 00110100 = 52 \quad (13 \times 4)
+$$
+
+**Arithmetic right shift**
+
+$$
+13 >> 2 = 00000011 = 3 \quad (13 / 4)
+$$
+
+**Logical right shift**
+
+$13 >>> 2 = 3$ (same as $>>$ here because positive)
+
+#### Negative shift example (important)
+
+Use an 8-bit view for intuition.
+
+Let $-8$ in 8-bit two's complement:
+
+$-8 = 11111000$ (in 8 bits)
+
+**Arithmetic right shift**
+
+- $-8 \gg 1$ : $11111000 \gg 1 \rightarrow 11111100$
+- $11111100$ is $-4$
+
+So $-8 \gg 1 == -4$
+
+**Logical right shift**
+
+- $-8 \gg 1$ : $11111000 \gg 1 \rightarrow 01111100$
+- which is $+124$ in unsigned interpretation
+
+So $>>>$ can turn negatives into huge positives.
+
+---
+
+#### Signed bits, one's complement, two's complement
+
+**Sign bit**
+
+In signed binary representations, the leftmost bit indicates sign:
+
+- $0 =$ nonnegative
+- $1 =$ negative (in two's complement)
+
+**One's complement**
+
+To negate: flip all bits
+
+Example in $8$ bits:
+
+$+5 = 00000101$
+
+$-5$ (one's complement) $= 11111010$
+
+Problem: there are two zeros: $+0 = 00000000$, $-0 = 11111111$
+
+One's complement is mainly a historical concept; Java uses two's complement.
+
+**Two's complement (what Java uses)**
+
+To negate:
+
+1. flip all bits
+2. add $1$
+
+Example:
+
+$+5 = 00000101$
+
+invert: $11111010$
+
+$+1$
+
+$11111011 = -5$
+
+**Why it matters**
+
+- single representation for $0$
+- subtraction becomes addition: $a - b = a + (\text{two's complement of } b)$
+- addition hardware is simpler
+
+**Range in two's complement**
+
+For $n$ bits:
+
+$$
+\min = -2^{n-1},\quad \max = 2^{n-1} - 1
+$$
+
+Example $8$-bit signed:
+
+$$
+\min = -128,\quad \max = +127
+$$
+
+---
+
+### 5. Boolean algebra identities + symbols
+
+- Circle-plus: $\oplus$ means XOR
+  - true when inputs differ
+- Overline: $\overline{A}$ means NOT A (complement)
+  - same as `!A`
+
+**Core identities (memorize)**
+
+Let $+ =$ OR, $\cdot =$ AND, overline $=$ NOT.
+
+**Identity laws**
+
+$$
+A + 0 = A,\quad A \cdot 1 = A
+$$
+
+**Domination**
+
+$$
+A + 1 = 1,\quad A \cdot 0 = 0
+$$
+
+**Idempotent**
+
+$$
+A + A = A,\quad A \cdot A = A
+$$
+
+**Complement**
+
+$$
+A + \overline{A} = 1,\quad A \cdot \overline{A} = 0
+$$
+
+**Double negation**
+
+$$
+\overline{\overline{A}} = A
+$$
+
+**Commutative**
+
+$$
+A + B = B + A,\quad A B = B A
+$$
+
+**Associative**
+
+$$
+(A + B) + C = A + (B + C),\quad (AB)C = A(BC)
+$$
+
+**Distributive**
+
+$$
+A(B + C) = AB + AC,\quad A + BC = (A + B)(A + C)
+$$
+
+**De Morgan's**
+
+$$
+\overline{A + B} = \overline{A} \cdot \overline{B},\quad \overline{AB} = \overline{A} + \overline{B}
+$$
+
+**XOR facts**
+
+- $A \oplus A = 0$
+- $A \oplus 0 = A$
+- $A \oplus 1 = \overline{A}$
+- XOR is associative/commutative
+
+**Digital symbols reference:** https://www.uilexas.org/files/academics/UILCS-DigitalSymbols.pdf

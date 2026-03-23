@@ -1,0 +1,106 @@
+---
+id: "uil-cs-practice-resources"
+title: "UIL CS: Practice Resources & Tips"
+date: "03/21/2026"
+description: "Practice resources, tips for success, and common UIL Computer Science traps"
+tags:
+  ["computer science", "programming", "UIL", "practice", "resources", "tips"]
+---
+
+# UIL CS: Practice Resources & Tips
+
+> This is part of the UIL CS study series. See also:
+>
+> - [Number Systems](/posts/uil-cs-number-systems)
+> - [Java Fundamentals](/posts/uil-cs-java-fundamentals)
+> - [Bitwise & Boolean](/posts/uil-cs-bitwise-boolean)
+> - [Recursion & Loops](/posts/uil-cs-recursion-loops)
+> - [OOP & Generics](/posts/uil-cs-oop-generics)
+> - [Collections & Algorithms](/posts/uil-cs-collections-algorithms)
+
+**Main topic list:** https://www.uiltexas.org/files/academics/UILCS-JavaTopicList2526.pdf
+
+---
+
+### Tips for Success
+
+- Practice tracing code line by line.
+- Use small examples to test logic (especially for loops, recursion, and bitwise).
+- Memorize operator precedence and common collection method behaviors.
+- Work past problems from all packet levels (Invitational, District, Region, State).
+
+---
+
+### Other important subjects to know (UIL-relevant)
+
+**1. Integer division and modulo (VERY common traps)**
+
+- $7 / 2 == 3$
+- $7 \% 2 == 1$
+- $-7 / 2 == -3$ in Java (truncates toward $0$)
+- $-7 \% 2 == -1$
+
+**2. Type casting + promotion**
+
+- `char` participates in arithmetic as an integer code point
+- expressions with mixed types promote:
+  - `int + double -> double`
+- integer overflow wraps around in Java (two's complement)
+
+**Example:**
+
+```java
+int x = Integer.MAX_VALUE;
+System.out.println(x + 1); // wraps to negative
+```
+
+**3. String pitfalls**
+
+- `==` compares references, not contents
+- use `.equals(...)`
+
+```java
+String a = new String("hi");
+String b = new String("hi");
+System.out.println(a == b);        // false
+System.out.println(a.equals(b));   // true
+```
+
+**4. Arrays vs ArrayList**
+
+- arrays fixed size, `.length`
+- `ArrayList` dynamic size, `.size()`
+
+**5. Common off-by-one errors in loops**
+
+$i < n$ vs $i <= n$ nested loops counting iterations is a frequent UIL question.
+
+**6. Recursion: must identify base case + number of calls**
+
+UIL often asks output and/or call depth.
+
+**7. Sorting/searching concepts**
+
+Know basics:
+
+- linear search: $O(n)$
+- binary search: $O(\log n)$ (requires sorted data)
+- typical sorting: $O(n \log n)$
+
+---
+
+### Practice Materials
+
+**Official UIL Resources**
+
+[https://www.uilexas.org/academics/page/2025-high-school-academic-study-materials](https://www.uilexas.org/academics/page/2025-high-school-academic-study-materials)
+
+**Practice Tests**
+
+[https://www.cs.utexas.edu/~scottm/uil/2008/practice2008.pdf](https://www.cs.utexas.edu/~scottm/uil/2008/practice2008.pdf)
+
+[https://www.uilexas.org/files/academics/1-CompSci_2017_District-Test.pdf](https://www.uilexas.org/files/academics/1-CompSci_2017_District-Test.pdf)
+
+[https://www.cs.utexas.edu/~scottm/uil/practiceMaterials.html](https://www.cs.utexas.edu/~scottm/uil/practiceMaterials.html)
+
+[https://www.apluscompsci.com/aplus_Sample_Test_2.pdf](https://www.apluscompsci.com/aplus_Sample_Test_2.pdf)

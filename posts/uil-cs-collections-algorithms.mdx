@@ -1,0 +1,164 @@
+---
+id: "uil-cs-collections-algorithms"
+title: "UIL CS: Collections & Algorithms"
+date: "03/22/2026"
+description: "Collections framework, algorithms, regex, trees, graphs, and postfix notation for UIL Computer Science"
+tags:
+  [
+    "computer science",
+    "programming",
+    "UIL",
+    "collections",
+    "algorithms",
+    "regex",
+  ]
+---
+
+# UIL CS: Collections & Algorithms
+
+> This is part of the UIL CS study series. See also:
+>
+> - [Number Systems](/posts/uil-cs-number-systems)
+> - [Java Fundamentals](/posts/uil-cs-java-fundamentals)
+> - [Bitwise & Boolean](/posts/uil-cs-bitwise-boolean)
+> - [Recursion & Loops](/posts/uil-cs-recursion-loops)
+> - [OOP & Generics](/posts/uil-cs-oop-generics)
+> - [Practice Resources](/posts/uil-cs-practice-resources)
+
+**Main topic list:** https://www.uiltexas.org/files/academics/UILCS-JavaTopicList2526.pdf
+
+---
+
+### 7. Regex Patterns (most common + how used)
+
+In Java:
+
+- `s.matches(regex)` must match entire string
+- Use `Pattern` and `Matcher` for searching
+
+```java
+String s = "insert regex pattern here";
+String t = "match me to a regex";
+Pattern pattern = Pattern.compile(s);
+Matcher matcher = pattern.matcher(t);
+```
+
+**Common patterns**
+
+| Pattern    | Meaning                                                   |
+| ---------- | --------------------------------------------------------- |
+| `.`        | any char                                                  |
+| `\d`       | digit                                                     |
+| `\D`       | not digit                                                 |
+| `\w`       | word char `[A-Za-z0-9_]`                                  |
+| `\W`       | not word                                                  |
+| `\s`       | whitespace                                                |
+| `\S`       | not whitespace                                            |
+| `\b`       | word boundary (position between `\w` and `\W`)            |
+| `\|`       | alternation (matches before and after, like a logical OR) |
+| `(?:...)`  | non-capturing group                                       |
+| `(?=...)`  | positive lookahead                                        |
+| `(?!...)`  | negative lookahead                                        |
+| `(?<=...)` | positive lookbehind                                       |
+| `(?<!...)` | negative lookbehind                                       |
+
+**Note:** `?` after a quantifier (`*`, `+`, `?`) is non-greedy/lazy.
+
+**Examples**
+
+```java
+"12345".matches("\\d+");       // true
+"12a45".matches("\\d+");       // false
+
+"abc".matches("[a-z]{3}");     // true
+"ABC".matches("[a-z]{3}");     // false
+
+"hello@gmail.com".matches("\\w+@\\w+\\.com"); // true-ish (simplified)
+
+"   ".matches("\\s+");         // true
+```
+
+---
+
+### 14. Collections & Common Methods
+
+**List / ArrayList**
+
+- Add/insert: `add(E)` / `add(index, E)`.
+- Access: `get(index)`.
+- Remove: `remove(index)` or `remove(Object)`.
+- Size: `size()`.
+- Example: Removing and adding values changes order.
+
+**Stack**
+
+- Push: `push(E)` or `add(E)` on a Stack.
+- Pop: `pop()`.
+- Peek: `peek()` returns top.
+- LIFO behavior.
+
+**Collections Utility Methods**
+
+- Rotate lists: `Collections.rotate(list, k)`.
+- Remove by condition: `removeIf(predicate)`.
+
+**Maps and Sets**
+
+- Basic behaviors: `HashMap`, `TreeMap`, `HashSet`, `TreeSet`.
+- Key methods: `put(key, value)`, `get(key)`, `containsKey(key)`, `contains()`, `size()`.
+
+---
+
+### 16. Trees & Graphs
+
+Binary Search Trees: Insert order affects shape. Tree properties: internal nodes vs leaves, diameter. Complexity: worst-case search in unbalanced BST is $O(n)$.
+
+---
+
+### 17. Postfix notation (Reverse Polish) with example
+
+**Polish notation reference:** https://www.uilexas.org/files/academics/UILCS-PolishNotation-Examples.pdf
+
+**Definition**
+
+Postfix places operators after operands.
+
+- Infix: $3 + 4$
+- Postfix: $3\ 4\ +$
+
+**Evaluate using a stack:**
+
+- push numbers
+- when operator appears: pop two operands, apply, push result
+
+**Example**
+
+Evaluate postfix: $5\ 2\ 3\ *\ +\ 4\ -$
+
+Steps:
+
+- push $5 \rightarrow [5]$
+- push $2 \rightarrow [5,2]$
+- push $3 \rightarrow [5,2,3]$
+- $*$: pop $3$ and $2 \rightarrow 2*3=6 \rightarrow [5,6]$
+- $+$: pop $6$ and $5 \rightarrow 5+6=11 \rightarrow [11]$
+- push $4 \rightarrow [11,4]$
+- $-$: pop $4$ and $11 \rightarrow 11-4=7 \rightarrow [7]$
+
+Answer: $7$
+
+---
+
+### 18. Algorithms/Complexity
+
+- Understand basic time complexity (e.g., BFS, simple loops).
+- Recognize inefficiencies (e.g., nested loops $\rightarrow O(n^2)$).
+- Recognize linear vs logarithmic vs polynomial behavior.
+
+---
+
+### 19. Miscellaneous
+
+- String methods: `length()`, `substring()`, `split()`, `toLowerCase()`, `matches()`.
+- Math class: `ceil`, `floor`, `pow`, `min`, `max`.
+- Scanner: input parsing: `nextInt()`, `nextLine()`.

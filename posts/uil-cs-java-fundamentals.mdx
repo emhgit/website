@@ -1,0 +1,113 @@
+---
+id: "uil-cs-java-fundamentals"
+title: "UIL CS: Java Fundamentals"
+date: "03/22/2026"
+description: "Java fundamentals for UIL Computer Science - printf, operator precedence, memory allocation, and more"
+tags: ["computer science", "programming", "UIL", "Java", "fundamentals"]
+---
+
+# UIL CS: Java Fundamentals
+
+> This is part of the UIL CS study series. See also:
+>
+> - [Number Systems](/posts/uil-cs-number-systems)
+> - [Bitwise & Boolean](/posts/uil-cs-bitwise-boolean)
+> - [Recursion & Loops](/posts/uil-cs-recursion-loops)
+> - [OOP & Generics](/posts/uil-cs-oop-generics)
+> - [Collections & Algorithms](/posts/uil-cs-collections-algorithms)
+> - [Practice Resources](/posts/uil-cs-practice-resources)
+
+**Main topic list:** https://www.uiltexas.org/files/academics/UILCS-JavaTopicList2526.pdf
+
+---
+
+### 2. printf (Java)
+
+Common formatting codes
+
+Use: `System.out.printf("format", values...);`
+
+| Code   | Meaning              | Example |
+| :----- | :------------------- | :------ |
+| `%d`   | integer              | `%d`    |
+| `%f`   | floating point       | `%f`    |
+| `%.nf` | float w/ n decimals  | `%.2f`  |
+| `%s`   | string               | `%s`    |
+| `%c`   | char                 | `%c`    |
+| `%b`   | boolean              | `%b`    |
+| `%n`   | newline              | `%n`    |
+| `%%`   | literal percent sign | `%%`    |
+
+#### Width + alignment
+
+- `%10d` width $10$ right-aligned
+- `%-10d` width $10$ left-aligned
+- `%05d` pad with zeros
+
+**Examples**
+
+```java
+int x = 42;
+double pi = Math.PI;
+String name = "UIL";
+
+System.out.printf("x=%d%n", x);            // x=42
+System.out.printf("pi=%6.3f%n", pi);       // pi= 3.142
+System.out.printf("%10d%n", x);            // [       42]
+System.out.printf("%-10s%n", name);        // [UIL      ]
+System.out.printf("%05d%n", x);            // 00042
+System.out.printf("100%% done%n");         // 100% done
+```
+
+---
+
+### 3. Operator Precedence
+
+1. Parentheses: `()`
+2. Unary: `!`, `++`, `--`, unary `+` `-`
+3. Multiply: `*` `/` `%`
+4. Add: `+` `-`
+5. Shift: `<<` `>>` `>>>`
+6. Relational: `<` `<=` `>` `>=` `instanceof`
+7. Equality: `==` `!=`
+8. Bitwise: `&` then `^` then `|`
+9. Logical: `&&` then `||`
+10. Ternary: `? :`
+11. Assignment: `=` `+=` `-=` ...
+
+**Memorization trick:** "PUMA SREBLTA"
+
+- Parentheses
+- Unary
+- Note: postfix operators return the old value of a variable and update the variable immediately
+- Multiplicative
+- Additive
+- Shift
+- Relational
+- Equality
+
+---
+
+### 6. Memory Allocated for Java Data Types
+
+Primitive types (fixed sizes)
+
+| Type    | Bits          | Bytes | Notes                                    |
+| :------ | :------------ | :---- | :--------------------------------------- |
+| boolean | JVM-dependent |       | usually 1 byte in arrays, not guaranteed |
+| byte    | 8             | 1     | -128..127                                |
+| short   | 16            | 2     |                                          |
+| char    | 16            | 2     | unsigned 0..65535                        |
+| int     | 32            | 4     |                                          |
+| float   | 32            | 4     | IEEE 754                                 |
+| long    | 64            | 8     |                                          |
+| double  | 64            | 8     | IEEE 754                                 |
+
+**Reference types**
+
+`String`, arrays, objects, collections store:
+
+- a reference in the variable
+- actual object is on the heap
+
+Reference size depends on JVM (commonly $4$ bytes with compressed oops, or $8$ bytes). UIL questions typically focus on primitive sizes.

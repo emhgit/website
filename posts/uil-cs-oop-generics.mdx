@@ -1,0 +1,86 @@
+---
+id: "uil-cs-oop-generics"
+title: "UIL CS: OOP & Generics"
+date: "03/22/2026"
+description: "Object-oriented programming and generics for UIL Computer Science - method dispatch, generics errors, and more"
+tags: ["computer science", "programming", "UIL", "OOP", "generics", "Java"]
+---
+
+# UIL CS: OOP & Generics
+
+> This is part of the UIL CS study series. See also:
+>
+> - [Number Systems](/posts/uil-cs-number-systems)
+> - [Java Fundamentals](/posts/uil-cs-java-fundamentals)
+> - [Bitwise & Boolean](/posts/uil-cs-bitwise-boolean)
+> - [Recursion & Loops](/posts/uil-cs-recursion-loops)
+> - [Collections & Algorithms](/posts/uil-cs-collections-algorithms)
+> - [Practice Resources](/posts/uil-cs-practice-resources)
+
+**Main topic list:** https://www.uiltexas.org/files/academics/UILCS-JavaTopicList2526.pdf
+
+---
+
+### 11. OOP: Method Dispatch + Generics Instancing Errors
+
+#### A. Method dispatch (dynamic dispatch)
+
+In Java:
+
+- Overloading resolved at compile time
+- Overriding resolved at runtime based on actual object type
+
+**Example:**
+
+```java
+class A {
+    void f() { System.out.println("A"); }
+}
+class B extends A {
+    @Override void f() { System.out.println("B"); }
+}
+
+A obj = new B();
+obj.f(); // prints "B"
+```
+
+Even though the variable type is `A`, the object is `B`, so `B.f()` runs.
+
+#### B. Generics: instancing examples (error vs not)
+
+**Example that causes an error**
+
+```java
+List<int> x = new ArrayList<int>(); // ERROR
+```
+
+**Correct:**
+
+```java
+List<Integer> x = new ArrayList<>();
+```
+
+**Another common generics error (invariance)**
+
+```java
+List<Integer> a = new ArrayList<>();
+List<Number> b = a; // ERROR
+```
+
+Even though `Integer` is a `Number`, `List<Integer>` is NOT a `List<Number>`.
+
+**Fix using wildcards:**
+
+```java
+List<? extends Number> b = a; // OK (read-only-ish)
+```
+
+**Example that is OK**
+
+```java
+List<Number> nums = new ArrayList<>();
+nums.add(3);    // Integer auto-boxed
+nums.add(2.5);  // Double
+```
+
+Auto-unboxing occurs whenever the compiler sees an object of type wrapper class passed into a primitive type. The `Double.doubleValue()` and `Integer.intValue()` methods are used for manual auto-unboxing.
