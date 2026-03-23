@@ -21,7 +21,9 @@ export async function generateMetadata({
 
   return createMetadata({
     title: post.title,
-    description: post.description,
+    description:
+      post.description ||
+      "A post probably about computer science, programming, math, algorithms, or something else",
     path: `/posts/${id}`,
     type: "article",
     publishedTime: post.date,

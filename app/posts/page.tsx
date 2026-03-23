@@ -5,7 +5,8 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Posts",
-  description: "Blog posts about computer science and programming",
+  description:
+    "Blog posts about computer science, programming, math, algorithms, and more",
   path: "/posts",
 });
 
