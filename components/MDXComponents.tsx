@@ -80,7 +80,7 @@ export const mdxComponents = {
   a: ({ href, children }: { href?: string; children: React.ReactNode }) => (
     <a
       href={href}
-      className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline transition-colors"
+      className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 underline transition-colors"
       target={href?.startsWith("http") ? "_blank" : undefined}
       rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
     >

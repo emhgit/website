@@ -24,7 +24,7 @@ export default function Home() {
                 href="https://joincpi.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 underline"
               >
                 Competitive Programming Initiative
               </a>
@@ -37,7 +37,7 @@ export default function Home() {
               href="https://github.com/emhgit"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline"
+              className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 underline"
             >
               GitHub
             </a>{" "}

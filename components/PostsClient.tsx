@@ -81,7 +81,7 @@ export default function PostsClient({ allPosts }: PostsClientProps) {
               >
                 <Link href={`/posts/${post.id}`} className="block group">
                   <div className="space-y-2">
-                    <h2 className="text-2xl font-semibold text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    <h2 className="text-2xl font-semibold text-foreground group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
                       {post.title}
                     </h2>
                     <p className="text-sm text-muted-foreground">
@@ -124,7 +124,7 @@ export default function PostsClient({ allPosts }: PostsClientProps) {
                       onClick={() => handlePageChange(page)}
                       className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                         currentPage === page
-                          ? "bg-blue-600 text-white"
+                          ? "bg-red-600 text-white"
                           : "text-muted-foreground bg-background border border-border hover:bg-accent hover:text-accent-foreground"
                       }`}
                     >

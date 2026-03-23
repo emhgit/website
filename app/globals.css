@@ -80,19 +80,19 @@ body {
 }
 
 .prose a {
-  color: #3b82f6;
+  color: #e53935;
 }
 
 .prose a:hover {
-  color: #2563eb;
+  color: #9b2c2c;
 }
 
 .dark .prose a {
-  color: #60a5fa;
+  color: #f87171;
 }
 
 .dark .prose a:hover {
-  color: #3b82f6;
+  color: #fca5a5;
 }
 
 .prose blockquote {
