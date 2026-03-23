@@ -2,52 +2,37 @@ import Navbar from "@/components/Navbar";
 import { TOC } from "@/components/TOC";
 import { notFound } from "next/navigation";
 import { getPost } from "@/lib/utils";
-import type { Metadata } from "next";
+import { createMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ id: string }>;
-}): Promise<Metadata> {
+}) {
   const { id } = await params;
   const post = await getPost(id);
 
   if (!post) {
     return {
       title: "Post Not Found",
+      robots: { index: false, follow: false },
     };
   }
 
-  return {
+  return createMetadata({
     title: post.title,
-    description: post.description || "Blog post by Elliott M. Harper",
-    other: {
-      "application/ld+json": JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Home",
-            item: "https://elliottmharper.dev/",
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Posts",
-            item: "https://elliottmharper.dev/posts",
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: post.title,
-            item: `https://elliottmharper.dev/posts/${id}`,
-          },
-        ],
-      }),
-    },
-  };
+    description: post.description,
+    path: `/posts/${id}`,
+    type: "article",
+    publishedTime: post.date,
+    keywords: post.tags || [
+      "Computer Science",
+      "Algorithms",
+      "Data Structures",
+      "Programming",
+      "Math",
+    ],
+  });
 }
 
 export default async function PostPage({

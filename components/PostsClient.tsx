@@ -87,6 +87,18 @@ export default function PostsClient({ allPosts }: PostsClientProps) {
                     <p className="text-sm text-muted-foreground">
                       {post.date && new Date(post.date).toLocaleDateString()}
                     </p>
+                    {post.tags && post.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {post.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-1 text-xs bg-muted text-muted-foreground rounded"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                     <p className="text-muted-foreground">{post.description}</p>
                   </div>
                 </Link>

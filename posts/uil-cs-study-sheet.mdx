@@ -2,16 +2,17 @@
 id: "uil-cs-study-sheet"
 title: "UIL CS Study Sheet"
 date: "03/21/2026"
-description: "Study sheet for UIL Computer Science"
+description: "Study sheet for UIL (University Interscholastic League) Computer Science"
+tags: ["computer science", "programming", "UIL", "algorithms"]
 ---
 
 # UIL CS Written Test Notes
 
 https://www.uiltexas.org/files/academics/UILCS-JavaTopicList2526.pdf
 
-### 1 Number Systems
+### 1. Number Systems
 
-#### A Converting from decimal to any base $b$
+#### A. Converting from decimal to any base
 
 **Method:** repeated division (for integers).
 
@@ -34,9 +35,9 @@ $156_{10} = 2130_{4}$
 
 ---
 
-#### B Shortcuts between binary, hex, and decimal
+#### B. Shortcuts between binary, hex, and decimal
 
-##### Binary $\leftrightarrow$ Decimal
+##### Binary to Decimal
 
 Binary is base $2$, so each bit represents a power of $2$.
 
@@ -48,7 +49,7 @@ $$
 
 So $101101_2 = 45_{10}$
 
-##### Hex $\leftrightarrow$ Decimal
+##### Hex to Decimal
 
 Hex is base $16$.
 
@@ -62,7 +63,7 @@ $$
 
 So $2AF_{16} = 687_{10}$
 
-##### Binary $\leftrightarrow$ Hex shortcut (VERY common on UIL)
+##### Binary to Hex shortcut (VERY common on UIL)
 
 Group bits in chunks of $4$ from the right.
 
@@ -80,7 +81,7 @@ So: $110101111001_2 = D79_{16}$
 
 ---
 
-#### C Arithmetic in a base other than decimal
+#### C. Arithmetic in a base other than decimal
 
 **Example:** addition in base $4$
 
@@ -105,7 +106,7 @@ Answer: $312_{4} + 233_{4} = 12131_{4}$
 
 ---
 
-### 2 printf (Java)
+### 2. printf (Java)
 
 Common formatting codes
 
@@ -145,7 +146,7 @@ System.out.printf("100%% done%n");         // 100% done
 
 ---
 
-### 3 Operator Precedence
+### 3. Operator Precedence
 
 1. Parentheses: `()`
 2. Unary: `!`, `++`, `--`, unary `+` `-`
@@ -172,7 +173,7 @@ System.out.printf("100%% done%n");         // 100% done
 
 ---
 
-### 4 Bitwise Operations (with a full example)
+### 4. Bitwise Operations (with a full example)
 
 **Operators:**
 
@@ -343,9 +344,7 @@ $$
 
 ---
 
-### 5 Boolean algebra identities + symbols
-
-**Symbols you asked about**
+### 5. Boolean algebra identities + symbols
 
 - Circle-plus: $\oplus$ means XOR
   - true when inputs differ
@@ -410,7 +409,7 @@ $$
 \overline{A + B} = \overline{A} \cdot \overline{B},\quad \overline{AB} = \overline{A} + \overline{B}
 $$
 
-**XOR facts (UIL loves these)**
+**XOR facts**
 
 - $A \oplus A = 0$
 - $A \oplus 0 = A$
@@ -421,7 +420,7 @@ $$
 
 ---
 
-### 6 Memory Allocated for Java Data Types
+### 6. Memory Allocated for Java Data Types
 
 Primitive types (fixed sizes)
 
@@ -447,7 +446,7 @@ Reference size depends on JVM (commonly $4$ bytes with compressed oops, or $8$ b
 
 ---
 
-### 7 Regex Patterns (most common + how used)
+### 7. Regex Patterns (most common + how used)
 
 In Java:
 
@@ -498,7 +497,7 @@ Matcher matcher = pattern.matcher(t);
 
 ---
 
-### 8 Recursion Tracing (example)
+### 8. Recursion Tracing (example)
 
 ```java
 static int f(int n) {
@@ -530,7 +529,7 @@ $$
 
 ---
 
-### 9 Tracing a Nested Loop (example)
+### 9. Tracing a Nested Loop (example)
 
 ```java
 int count = 0;
@@ -555,7 +554,7 @@ Output: $24$
 
 ---
 
-### 10 Math.random() and Random
+### 10. Math.random() and Random
 
 **Math.random()**
 
@@ -581,9 +580,9 @@ boolean ok = r.nextBoolean();
 
 ---
 
-### 11 OOP: Method Dispatch + Generics Instancing Errors
+### 11. OOP: Method Dispatch + Generics Instancing Errors
 
-#### A Method dispatch (dynamic dispatch)
+#### A. Method dispatch (dynamic dispatch)
 
 In Java:
 
@@ -606,7 +605,7 @@ obj.f(); // prints "B"
 
 Even though the variable type is `A`, the object is `B`, so `B.f()` runs.
 
-#### B Generics: instancing examples (error vs not)
+#### B. Generics: instancing examples (error vs not)
 
 **Example that causes an error**
 
@@ -647,7 +646,7 @@ Auto-unboxing occurs whenever the compiler sees an object of type wrapper class 
 
 ---
 
-### 12 Pass-By-Value in Java
+### 12. Pass-By-Value in Java
 
 Java always passes primitive values by value. For objects, reference copies are passed. Assigning to a parameter doesn't change the original reference.
 
@@ -666,7 +665,7 @@ Java always passes primitive values by value. For objects, reference copies are 
 
 ---
 
-### 14 Collections & Common Methods
+### 14. Collections & Common Methods
 
 **List / ArrayList**
 
@@ -695,7 +694,7 @@ Java always passes primitive values by value. For objects, reference copies are 
 
 ---
 
-### 15 Arrays & Strings
+### 15. Arrays & Strings
 
 Arrays: traversal, indexing, mutation. Multi-dimensional arrays.
 
@@ -703,13 +702,13 @@ Strings: `substring`, `charAt`, concatenation. String to char array: `"abc".toCh
 
 ---
 
-### 16 Trees & Graphs
+### 16. Trees & Graphs
 
 Binary Search Trees: Insert order affects shape. Tree properties: internal nodes vs leaves, diameter. Complexity: worst-case search in unbalanced BST is $O(n)$.
 
 ---
 
-### 17 Postfix notation (Reverse Polish) with example
+### 17. Postfix notation (Reverse Polish) with example
 
 [https://www.uilexas.org/files/academics/UILCS-PolishNotation-Examples.pdf](https://www.uilexas.org/files/academics/UILCS-PolishNotation-Examples.pdf)
 
@@ -743,7 +742,7 @@ Answer: $7$
 
 ---
 
-### 18 Algorithms/Complexity
+### 18. Algorithms/Complexity
 
 - Understand basic time complexity (e.g., BFS, simple loops).
 - Recognize inefficiencies (e.g., nested loops $\rightarrow O(n^2)$).
@@ -751,7 +750,7 @@ Answer: $7$
 
 ---
 
-### 19 Miscellaneous
+### 19. Miscellaneous
 
 - String methods: `length()`, `substring()`, `split()`, `toLowerCase()`, `matches()`.
 - Math class: `ceil`, `floor`, `pow`, `min`, `max`.
@@ -770,14 +769,14 @@ Answer: $7$
 
 ### Other important subjects to know (UIL-relevant)
 
-**1) Integer division and modulo (VERY common traps)**
+**1. Integer division and modulo (VERY common traps)**
 
 - $7 / 2 == 3$
 - $7 \% 2 == 1$
 - $-7 / 2 == -3$ in Java (truncates toward $0$)
 - $-7 \% 2 == -1$
 
-**2) Type casting + promotion**
+**2. Type casting + promotion**
 
 - `char` participates in arithmetic as an integer code point
 - expressions with mixed types promote:
@@ -791,7 +790,7 @@ int x = Integer.MAX_VALUE;
 System.out.println(x + 1); // wraps to negative
 ```
 
-**3) String pitfalls**
+**3. String pitfalls**
 
 - `==` compares references, not contents
 - use `.equals(...)`
@@ -803,20 +802,20 @@ System.out.println(a == b);        // false
 System.out.println(a.equals(b));   // true
 ```
 
-**4) Arrays vs ArrayList**
+**4. Arrays vs ArrayList**
 
 - arrays fixed size, `.length`
 - `ArrayList` dynamic size, `.size()`
 
-**5) Common off-by-one errors in loops**
+**5. Common off-by-one errors in loops**
 
 $i < n$ vs $i <= n$ nested loops counting iterations is a frequent UIL question.
 
-**6) Recursion: must identify base case + number of calls**
+**6. Recursion: must identify base case + number of calls**
 
 UIL often asks output and/or call depth.
 
-**7) Sorting/searching concepts**
+**7. Sorting/searching concepts**
 
 Know basics:
 

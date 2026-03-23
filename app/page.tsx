@@ -1,4 +1,11 @@
 import Navbar from "@/components/Navbar";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata = createMetadata({
+  title: "Home",
+  description: "Portfolio and blog of Elliott M. Harper",
+  path: "/",
+});
 
 export default function Home() {
   return (

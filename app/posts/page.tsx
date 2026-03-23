@@ -1,6 +1,13 @@
 import Navbar from "@/components/Navbar";
 import { getPosts } from "@/lib/utils";
 import PostsClient from "@/components/PostsClient";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata = createMetadata({
+  title: "Posts",
+  description: "Blog posts about computer science and programming",
+  path: "/posts",
+});
 
 export default async function PostsPage() {
   const posts = await getPosts();

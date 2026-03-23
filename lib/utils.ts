@@ -43,6 +43,7 @@ export interface PostData {
     description: string;
     content: React.ReactNode;
     tableOfContents: TableOfContentsItem[];
+    tags: string[];
 }
 
 export async function getPost(id: string): Promise<PostData | null> {
@@ -79,6 +80,7 @@ export async function getPost(id: string): Promise<PostData | null> {
             description: data.description || "",
             content: compiledContent,
             tableOfContents,
+            tags: data.tags || [],
         };
     } catch (error) {
         console.error("Error getting post:", error);
@@ -91,6 +93,7 @@ export interface Post {
     title: string;
     date: string;
     description: string;
+    tags: string[];
 }
 
 export async function getPosts(): Promise<Post[]> {
@@ -111,6 +114,7 @@ export async function getPosts(): Promise<Post[]> {
                     title: data.title || id,
                     date: data.date || "",
                     description: data.description || "",
+                    tags: data.tags || [],
                 };
             })
             .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
