@@ -48,6 +48,16 @@ export const projects: Project[] = [
         githubUrl: "https://github.com/emhgit/competitive-programming",
     },
     {
+        id: "cpinitiative",
+        name: "Competitive Programming Initiative (CPI)",
+        tags: ["Next.js", "Tailwind CSS", "Vercel"],
+        description:
+            "Maintained website for the Competitive Programming Initiative (CPI), a non-profit organization dedicated to promoting competitive programming education and resources.",
+        githubUrl: "https://github.com/cpinitiative/cpinitiative",
+        liveUrl: "https://joincpi.org",
+        imageUrl: "/cpi-ss.png",
+    },
+    {
         id: "java-lsp",
         name: "(Coming Soon) USACO Guide IDE Java LSP",
         tags: ["Python", "FastAPI", "JDTLS", "Modal", "Monaco Editor", "Docker"],
