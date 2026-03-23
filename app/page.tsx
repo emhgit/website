@@ -18,17 +18,6 @@ export default function Home() {
           </h1>
           <div className="space-y-2 text-lg text-muted-foreground mb-8">
             <p>Computer science and electronics enthusiast</p>
-            <p>
-              Director of Web Development for{" "}
-              <a
-                href="https://joincpi.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 underline"
-              >
-                Competitive Programming Initiative
-              </a>
-            </p>
             <p>Junior in high school from Texas (Class of 2027)</p>
           </div>
           <p className="text-foreground mb-8">
@@ -41,7 +30,13 @@ export default function Home() {
             >
               GitHub
             </a>{" "}
-            to see projects I am working on.
+            to see projects I am working on, and contact me at my{" "}
+            <a
+              href="mailto:eharper0815@gmail.com"
+              className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 underline"
+            >
+              email.
+            </a>
           </p>
         </div>
       </main>
