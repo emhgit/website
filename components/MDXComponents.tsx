@@ -7,6 +7,9 @@ const generateId = (text: string): string => {
     .replace(/\s+/g, "-");
 };
 
+import { CodeBlock } from "./CodeBlock";
+import { InlineCode } from "./InlineCode";
+
 export const mdxComponents = {
   h1: ({ children }: { children: React.ReactNode }) => {
     const id = generateId(children?.toString() || "");
@@ -106,14 +109,14 @@ export const mdxComponents = {
     </blockquote>
   ),
   code: ({ children }: { children: React.ReactNode }) => (
-    <code className="bg-muted text-foreground px-2 py-1 rounded text-sm font-mono">
+    <InlineCode className="bg-muted text-foreground px-2 py-1 rounded text-sm font-mono">
       {children}
-    </code>
+    </InlineCode>
   ),
   pre: ({ children }: { children: React.ReactNode }) => (
-    <pre className="bg-muted text-foreground p-4 rounded-lg overflow-x-auto mb-4 font-mono text-sm">
+    <CodeBlock className="bg-muted text-foreground p-6 rounded-lg overflow-x-auto mb-4 font-mono text-sm">
       {children}
-    </pre>
+    </CodeBlock>
   ),
   strong: ({ children }: { children: React.ReactNode }) => (
     <strong className="font-semibold text-foreground">{children}</strong>
