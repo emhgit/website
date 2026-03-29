@@ -62,7 +62,7 @@ export default function ProjectsPage() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-sm text-foreground hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="flex items-center space-x-2 text-sm text-foreground hover:text-red-600 dark:hover:text-red-400 transition-colors"
                   >
                     <Github className="h-4 w-4" />
                     <span>Code</span>
@@ -74,7 +74,7 @@ export default function ProjectsPage() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-sm text-foreground hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="flex items-center space-x-2 text-sm text-foreground hover:text-red-600 dark:hover:text-red-400 transition-colors"
                   >
                     <ExternalLink className="h-4 w-4" />
                     <span>Live</span>
