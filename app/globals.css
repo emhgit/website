@@ -124,8 +124,22 @@ body {
   font-style: italic;
 }
 
-.prose-headings-text-center {
-  text-align: center;
+.prose-headings-text-center h1,
+.prose-headings-text-center h2,
+.prose-headings-text-center h3,
+.prose-headings-text-center h4,
+.prose-headings-text-center h5,
+.prose-headings-text-center h6 {
+  text-align: center !important;
+}
+
+.prose-headings-text-red-950 h1,
+.prose-headings-text-red-950 h2,
+.prose-headings-text-red-950 h3,
+.prose-headings-text-red-950 h4,
+.prose-headings-text-red-950 h5,
+.prose-headings-text-red-950 h6 {
+  color: #742a2a !important;
 }
 
 .footnotes ol {

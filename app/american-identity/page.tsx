@@ -23,7 +23,7 @@ export default async function AmericanIdentityPage() {
 
         {indexPost && (
           <div className="prose prose-lg max-w-none mb-12">
-            <div className="prose-headings:scroll-mt-24 prose-headings:text-red-950 prose-p:text-gray-700 prose-strong:text-red-950 prose-headings-text-center">
+            <div className="prose-headings-text-center prose-headings-text-red-950">
               {indexPost.content}
             </div>
           </div>
