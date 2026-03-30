@@ -106,6 +106,13 @@ export default function Navbar() {
             >
               /posts
             </Link>
+            <Link
+              href="/american-identity"
+              className="block text-foreground/70 hover:text-foreground transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              /american-identity
+            </Link>
           </div>
         </div>
       )}
