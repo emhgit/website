@@ -55,7 +55,7 @@ export default async function AmericanIdentitySectionPage({
         <div className="mb-6">
           <Link
             href="/american-identity"
-            className="inline-flex items-center text-blue-900 hover:text-muted-red transition-colors duration-200"
+            className="inline-flex items-center text-blue-900 hover:text-red-800 transition-colors duration-200"
           >
             <svg
               className="mr-2 w-4 h-4"

@@ -34,16 +34,16 @@ export default function AmericanIdentityGrid() {
         <Link
           key={section.id}
           href={`/american-identity/${section.id}`}
-          className="group block p-6 border-2 border-red-950 rounded-lg transition-all duration-300 hover:bg-muted-red hover:text-off-white"
+          className="group block p-6 border-2 border-red-800 rounded-lg transition-all duration-300 hover:bg-red-800 hover:text-off-white"
         >
           <div className="space-y-3">
-            <h3 className="text-xl font-semibold text-red-950 group-hover:text-off-white">
+            <h3 className="text-xl font-semibold text-red-800 group-hover:text-off-white">
               {section.title}
             </h3>
             <p className="text-gray-600 group-hover:text-off-white/90 text-sm leading-relaxed">
               {section.description}
             </p>
-            <div className="flex items-center text-blue-900 group-hover:text-off-white font-medium text-sm">
+            <div className="flex items-center text-blue-900 group-hover:text-blue-900 font-medium text-sm">
               <span>Read more</span>
               <svg
                 className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"

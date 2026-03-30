@@ -6,7 +6,6 @@ import fs from "fs";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import remarkGfm from "remark-gfm";
-import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 export interface TableOfContentsItem {
@@ -22,11 +21,13 @@ export const getTOC = (content: string) => {
 
     while ((match = headingRegex.exec(content)) !== null) {
         const level = match[1].length;
-        const title = match[2].trim();
+        const title = match[2].trim().replace(/object-object/g, "");
         const id = title
             .toLowerCase()
             .replace(/[^\w\s-]/g, "")
-            .replace(/\s+/g, "-");
+            .replace(/\s+/g, "-")
+            .replace(/^-+|-+$/g, "")
+            .replace(/--+/g, "-");
 
         tableOfContents.push({
             id,
@@ -69,7 +70,7 @@ export async function getPost(id: string): Promise<PostData | null> {
                 parseFrontmatter: true,
                 mdxOptions: {
                     remarkPlugins: [remarkMath, remarkGfm],
-                    rehypePlugins: [rehypeKatex, rehypeSlug, rehypeAutolinkHeadings],
+                    rehypePlugins: [rehypeKatex, rehypeAutolinkHeadings],
                 },
             },
             components: mdxComponents,
@@ -119,7 +120,7 @@ export async function getAmericanIdentityPost(id: string): Promise<PostData | nu
                 parseFrontmatter: true,
                 mdxOptions: {
                     remarkPlugins: [remarkMath, remarkGfm],
-                    rehypePlugins: [rehypeKatex, rehypeSlug, rehypeAutolinkHeadings],
+                    rehypePlugins: [rehypeKatex, rehypeAutolinkHeadings],
                 },
             },
             components: mdxComponents,

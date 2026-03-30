@@ -1,10 +1,12 @@
 // Helper function to generate heading IDs
 const generateId = (text: string): string => {
-  return text
-    .toString()
+  const cleanText = text.toString().replace(/object-object/g, "");
+  return cleanText
     .toLowerCase()
     .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-");
+    .replace(/\s+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/--+/g, "-");
 };
 
 import { CodeBlock } from "./CodeBlock";
