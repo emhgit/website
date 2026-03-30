@@ -12,6 +12,7 @@ export default {
       fontFamily: {
         sans: ["Arial", "Helvetica", "sans-serif"],
       },
+      colors: {},
     },
   },
   plugins: [typography],

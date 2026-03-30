@@ -7,6 +7,7 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 export interface TableOfContentsItem {
     id: string;
@@ -68,7 +69,7 @@ export async function getPost(id: string): Promise<PostData | null> {
                 parseFrontmatter: true,
                 mdxOptions: {
                     remarkPlugins: [remarkMath, remarkGfm],
-                    rehypePlugins: [rehypeKatex, rehypeSlug],
+                    rehypePlugins: [rehypeKatex, rehypeSlug, rehypeAutolinkHeadings],
                 },
             },
             components: mdxComponents,
@@ -94,6 +95,79 @@ export interface Post {
     date: string;
     description: string;
     tags: string[];
+}
+
+export async function getAmericanIdentityPost(id: string): Promise<PostData | null> {
+    try {
+        const postsDirectory = path.join(process.cwd(), "posts", "american-identity");
+        const fullPath = path.join(postsDirectory, `${id}.mdx`);
+
+        if (!fs.existsSync(fullPath)) {
+            return null;
+        }
+
+        const fileContents = fs.readFileSync(fullPath, "utf8");
+        const { data, content } = matter(fileContents);
+
+        // Generate table of contents
+        const tableOfContents = getTOC(content);
+
+        // Compile MDX content with math plugins
+        const { content: compiledContent } = await compileMDX({
+            source: content,
+            options: {
+                parseFrontmatter: true,
+                mdxOptions: {
+                    remarkPlugins: [remarkMath, remarkGfm],
+                    rehypePlugins: [rehypeKatex, rehypeSlug, rehypeAutolinkHeadings],
+                },
+            },
+            components: mdxComponents,
+        });
+
+        return {
+            title: data.title || id,
+            date: data.date || "",
+            description: data.description || "",
+            content: compiledContent,
+            tableOfContents,
+            tags: data.tags || [],
+        };
+    } catch (error) {
+        console.error("Error getting American Identity post:", error);
+        return null;
+    }
+}
+
+export async function getAmericanIdentityPosts(): Promise<Post[]> {
+    try {
+        const postsDirectory = path.join(process.cwd(), "posts", "american-identity");
+        const fileNames = fs.readdirSync(postsDirectory);
+
+        const posts = fileNames
+            .filter((fileName) => fileName.endsWith(".mdx"))
+            .map((fileName) => {
+                const id = fileName.replace(/\.mdx$/, "");
+                const fullPath = path.join(postsDirectory, fileName);
+                const fileContents = fs.readFileSync(fullPath, "utf8");
+                const { data } = matter(fileContents);
+
+                return {
+                    id,
+                    title: data.title || id,
+                    date: data.date || "",
+                    description: data.description || "",
+                    tags: data.tags || [],
+                };
+            })
+            .filter((post) => post.id !== "index") // Exclude index from the list
+            .sort((a, b) => a.title.localeCompare(b.title));
+
+        return posts;
+    } catch (error) {
+        console.error("Error getting American Identity posts:", error);
+        return [];
+    }
 }
 
 export async function getPosts(): Promise<Post[]> {

@@ -22,6 +22,11 @@
   --font-sans: Arial, Helvetica, sans-serif;
 }
 
+@theme {
+  --color-off-white: #f8f9fa;
+  --color-muted-red: #dc2626;
+}
+
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
@@ -117,4 +122,50 @@ body {
 .prose em {
   color: var(--foreground);
   font-style: italic;
+}
+
+.prose-headings-text-center {
+  text-align: center;
+}
+
+.footnotes ol {
+  list-style-position: outside; /* Keeps numbers aligned left of the text */
+  margin-left: 1.5rem; /* Adds space for the numbers */
+}
+
+.footnotes li {
+  margin-bottom: 0.5rem;
+}
+
+/* Force the paragraph inside the li to be inline */
+.footnotes li p {
+  display: inline !important;
+  margin: 0 !important;
+}
+
+/* Ensure the backlink arrow stays on the same line */
+.footnotes li a[data-footnote-backref],
+.footnotes li a.revfootnote {
+  display: inline;
+  margin-left: 0.25rem;
+}
+
+/* Fix footnote scrolling - ensure footnote items are scroll targets */
+.footnotes li {
+  scroll-margin-top: 2rem; /* Add space above when scrolling to footnote */
+}
+
+/* Ensure footnote section has proper ID for scrolling */
+.footnotes {
+  scroll-margin-top: 2rem;
+}
+
+/* Target the specific footnote IDs that remark-gfm generates */
+.footnotes li[id^="fn-"] {
+  scroll-margin-top: 2rem;
+}
+
+/* Target the footnote references */
+sup[id^="fnref-"] {
+  scroll-margin-top: 2rem;
 }

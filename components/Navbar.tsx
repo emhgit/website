@@ -38,6 +38,12 @@ export default function Navbar() {
               >
                 /posts
               </Link>
+              <Link
+                href="/american-identity"
+                className="text-foreground/70 hover:text-foreground transition-colors"
+              >
+                /american-identity
+              </Link>
             </div>
           </div>
 
