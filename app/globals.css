@@ -141,3 +141,25 @@ body {
 .prose-headings-text-red-950 h6 {
   color: #742a2a !important;
 }
+
+.footnotes ol {
+  list-style-position: outside; /* Keeps numbers aligned left of the text */
+  margin-left: 1.5rem; /* Adds space for the numbers */
+}
+
+.footnotes li {
+  margin-bottom: 0.5rem;
+}
+
+/* Force the paragraph inside the li to be inline */
+.footnotes li p {
+  display: inline !important;
+  margin: 0 !important;
+}
+
+/* Ensure the backlink arrow stays on the same line */
+.footnotes li a[data-footnote-backref],
+.footnotes li a.revfootnote {
+  display: inline;
+  margin-left: 0.25rem;
+}
