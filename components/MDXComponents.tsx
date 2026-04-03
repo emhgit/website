@@ -82,12 +82,20 @@ export const mdxComponents = {
   p: ({ children }: { children: React.ReactNode }) => (
     <p className="text-foreground mb-4 leading-relaxed">{children}</p>
   ),
-  a: ({ href, children }: { href?: string; children: React.ReactNode }) => (
+  a: ({
+    href,
+    children,
+    ...props
+  }: {
+    href?: string;
+    children: React.ReactNode;
+  }) => (
     <a
       href={href}
       className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 underline transition-colors"
       target={href?.startsWith("http") ? "_blank" : undefined}
       rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
+      {...props}
     >
       {children}
     </a>
@@ -102,8 +110,10 @@ export const mdxComponents = {
       {children}
     </ol>
   ),
-  li: ({ children }: { children: React.ReactNode }) => (
-    <li className="text-foreground">{children}</li>
+  li: ({ children, ...props }: { children: React.ReactNode }) => (
+    <li className="text-foreground" {...props}>
+      {children}
+    </li>
   ),
   blockquote: ({ children }: { children: React.ReactNode }) => (
     <blockquote className="border-l-4 border-border pl-4 italic text-muted-foreground mb-4">

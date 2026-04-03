@@ -70,7 +70,10 @@ export async function getPost(id: string): Promise<PostData | null> {
                 parseFrontmatter: true,
                 mdxOptions: {
                     remarkPlugins: [remarkMath, remarkGfm],
-                    rehypePlugins: [rehypeKatex, rehypeAutolinkHeadings],
+                    rehypePlugins: [
+                        rehypeKatex,
+                        rehypeAutolinkHeadings,
+                    ],
                 },
             },
             components: mdxComponents,
