@@ -13,74 +13,82 @@ import { CodeBlock } from "./CodeBlock";
 import { InlineCode } from "./InlineCode";
 
 export const mdxComponents = {
-  h1: ({ children }: { children: React.ReactNode }) => {
+  h1: ({ children, ...props }: { children: React.ReactNode }) => {
     const id = generateId(children?.toString() || "");
     return (
       <h1
         id={id}
         className="text-4xl font-bold text-foreground mb-6 scroll-mt-24"
+        {...props}
       >
         {children}
       </h1>
     );
   },
-  h2: ({ children }: { children: React.ReactNode }) => {
+  h2: ({ children, ...props }: { children: React.ReactNode }) => {
     const id = generateId(children?.toString() || "");
     return (
       <h2
         id={id}
         className="text-3xl font-semibold text-foreground mb-4 mt-8 scroll-mt-24"
+        {...props}
       >
         {children}
       </h2>
     );
   },
-  h3: ({ children }: { children: React.ReactNode }) => {
+  h3: ({ children, ...props }: { children: React.ReactNode }) => {
     const id = generateId(children?.toString() || "");
     return (
       <h3
         id={id}
         className="text-2xl font-semibold text-foreground mb-3 mt-6 scroll-mt-24"
+        {...props}
       >
         {children}
       </h3>
     );
   },
-  h4: ({ children }: { children: React.ReactNode }) => {
+  h4: ({ children, ...props }: { children: React.ReactNode }) => {
     const id = generateId(children?.toString() || "");
     return (
       <h4
         id={id}
         className="text-xl font-semibold text-foreground mb-2 mt-4 scroll-mt-24"
+        {...props}
       >
         {children}
       </h4>
     );
   },
-  h5: ({ children }: { children: React.ReactNode }) => {
+  h5: ({ children, ...props }: { children: React.ReactNode }) => {
     const id = generateId(children?.toString() || "");
     return (
       <h5
         id={id}
         className="text-lg font-semibold text-foreground mb-2 mt-4 scroll-mt-24"
+        {...props}
       >
         {children}
       </h5>
     );
   },
-  h6: ({ children }: { children: React.ReactNode }) => {
+  h6: ({ children, ...props }: { children: React.ReactNode }) => {
     const id = generateId(children?.toString() || "");
     return (
       <h6
         id={id}
         className="text-base font-semibold text-foreground mb-2 mt-4 scroll-mt-24"
+        {...props}
       >
         {children}
       </h6>
     );
   },
-  p: ({ children }: { children: React.ReactNode }) => (
-    <p className="text-foreground mb-4 leading-relaxed">{children}</p>
+  p: ({ children, ...props }: { children: React.ReactNode }) => (
+    <p className="text-foreground mb-4 leading-relaxed" {...props}>
+      {children}
+    </p>
   ),
   a: ({
     href,
@@ -100,13 +108,19 @@ export const mdxComponents = {
       {children}
     </a>
   ),
-  ul: ({ children }: { children: React.ReactNode }) => (
-    <ul className="list-disc list-inside text-foreground mb-4 space-y-2">
+  ul: ({ children, ...props }: { children: React.ReactNode }) => (
+    <ul
+      className="list-disc list-inside text-foreground mb-4 space-y-2"
+      {...props}
+    >
       {children}
     </ul>
   ),
-  ol: ({ children }: { children: React.ReactNode }) => (
-    <ol className="list-decimal list-inside text-foreground mb-4 space-y-2">
+  ol: ({ children, ...props }: { children: React.ReactNode }) => (
+    <ol
+      className="list-decimal list-inside text-foreground mb-4 space-y-2"
+      {...props}
+    >
       {children}
     </ol>
   ),
@@ -115,50 +129,70 @@ export const mdxComponents = {
       {children}
     </li>
   ),
-  blockquote: ({ children }: { children: React.ReactNode }) => (
-    <blockquote className="border-l-4 border-border pl-4 italic text-muted-foreground mb-4">
+  blockquote: ({ children, ...props }: { children: React.ReactNode }) => (
+    <blockquote
+      className="border-l-4 border-border pl-4 italic text-muted-foreground mb-4"
+      {...props}
+    >
       {children}
     </blockquote>
   ),
-  code: ({ children }: { children: React.ReactNode }) => (
-    <InlineCode className="bg-muted text-foreground px-2 py-1 rounded text-sm font-mono">
+  code: ({ children, ...props }: { children: React.ReactNode }) => (
+    <InlineCode
+      className="bg-muted text-foreground px-2 py-1 rounded text-sm font-mono"
+      {...props}
+    >
       {children}
     </InlineCode>
   ),
-  pre: ({ children }: { children: React.ReactNode }) => (
-    <CodeBlock className="bg-muted text-foreground p-6 rounded-lg overflow-x-auto mb-4 font-mono text-sm">
+  pre: ({ children, ...props }: { children: React.ReactNode }) => (
+    <CodeBlock
+      className="bg-muted text-foreground p-6 rounded-lg overflow-x-auto mb-4 font-mono text-sm"
+      {...props}
+    >
       {children}
     </CodeBlock>
   ),
-  strong: ({ children }: { children: React.ReactNode }) => (
-    <strong className="font-semibold text-foreground">{children}</strong>
+  strong: ({ children, ...props }: { children: React.ReactNode }) => (
+    <strong className="font-semibold text-foreground" {...props}>
+      {children}
+    </strong>
   ),
-  em: ({ children }: { children: React.ReactNode }) => (
-    <em className="italic text-foreground">{children}</em>
+  em: ({ children, ...props }: { children: React.ReactNode }) => (
+    <em className="italic text-foreground" {...props}>
+      {children}
+    </em>
   ),
-  table: ({ children }: { children: React.ReactNode }) => (
-    <div className="overflow-x-auto mb-4">
+  table: ({ children, ...props }: { children: React.ReactNode }) => (
+    <div className="overflow-x-auto mb-4" {...props}>
       <table className="min-w-full border-collapse border border-border">
         {children}
       </table>
     </div>
   ),
-  thead: ({ children }: { children: React.ReactNode }) => (
-    <thead className="bg-muted">{children}</thead>
+  thead: ({ children, ...props }: { children: React.ReactNode }) => (
+    <thead className="bg-muted" {...props}>
+      {children}
+    </thead>
   ),
-  tbody: ({ children }: { children: React.ReactNode }) => (
-    <tbody>{children}</tbody>
+  tbody: ({ children, ...props }: { children: React.ReactNode }) => (
+    <tbody {...props}>{children}</tbody>
   ),
-  tr: ({ children }: { children: React.ReactNode }) => (
-    <tr className="border-b border-border">{children}</tr>
+  tr: ({ children, ...props }: { children: React.ReactNode }) => (
+    <tr className="border-b border-border" {...props}>
+      {children}
+    </tr>
   ),
-  th: ({ children }: { children: React.ReactNode }) => (
-    <th className="border border-border px-4 py-2 text-left font-semibold text-foreground">
+  th: ({ children, ...props }: { children: React.ReactNode }) => (
+    <th
+      className="border border-border px-4 py-2 text-left font-semibold text-foreground"
+      {...props}
+    >
       {children}
     </th>
   ),
-  td: ({ children }: { children: React.ReactNode }) => (
-    <td className="border border-border px-4 py-2 text-foreground">
+  td: ({ children, ...props }: { children: React.ReactNode }) => (
+    <td className="border border-border px-4 py-2 text-foreground" {...props}>
       {children}
     </td>
   ),
