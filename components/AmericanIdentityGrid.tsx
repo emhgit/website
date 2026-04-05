@@ -25,6 +25,18 @@ const sections = [
     description:
       "Investigating the development of privacy rights in American law",
   },
+  {
+    id: "conclusion",
+    title: "Conclusion",
+    description:
+      "Summarizing the key findings and implications of the American identity study",
+  },
+  {
+    id: "bibliography",
+    title: "Bibliography",
+    description:
+      "A collection of primary, secondary, and legal sources related to American identity",
+  },
 ];
 
 export default function AmericanIdentityGrid() {

@@ -167,3 +167,8 @@ body {
   display: inline;
   margin-left: 0.25rem;
 }
+
+.bibliography-entry p {
+  margin-left: 2rem;
+  text-indent: -2rem;
+}
