@@ -20,10 +20,13 @@ export default async function AmericanIdentityPage() {
         <h1 className="text-4xl font-bold text-blue-900 mb-8 text-center">
           American Identity
         </h1>
+        <h2 className="text-2xl font-bold text-blue-900 mb-8 text-center">
+          By Elliott M. Harper
+        </h2>
 
         {indexPost && (
           <div className="prose prose-lg max-w-none mb-12">
-            <div className="prose-headings-text-center prose-headings-text-red-950">
+            <div className="prose-headings-text-center prose-headings-text-red-950 prose-content-text-center">
               {indexPost.content}
             </div>
           </div>

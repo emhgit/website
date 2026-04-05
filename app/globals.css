@@ -142,6 +142,10 @@ body {
   color: #742a2a !important;
 }
 
+.prose-content-text-center p {
+  text-align: center !important;
+}
+
 .footnotes ol {
   list-style-position: outside; /* Keeps numbers aligned left of the text */
   margin-left: 1.5rem; /* Adds space for the numbers */
