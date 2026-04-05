@@ -151,6 +151,11 @@ body {
   margin-left: 1.5rem; /* Adds space for the numbers */
 }
 
+.footnotes h2 {
+  font-weight: bold !important;
+  font-size: 1.875rem !important;
+}
+
 .footnotes li {
   margin-bottom: 0.5rem;
 }

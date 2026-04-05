@@ -74,6 +74,7 @@ export async function getPost(id: string): Promise<PostData | null> {
           rehypePlugins: [rehypeKatex, rehypeAutolinkHeadings],
           remarkRehypeOptions: {
             footnoteBackContent: "Back ↑",
+            footnoteLabelTagName: "h2",
           },
         },
       },
@@ -133,6 +134,7 @@ export async function getAmericanIdentityPost(
           rehypePlugins: [rehypeKatex, rehypeAutolinkHeadings],
           remarkRehypeOptions: {
             footnoteBackContent: "Back ↑",
+            footnoteLabelTagName: "h2",
           },
         },
       },
