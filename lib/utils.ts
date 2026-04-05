@@ -7,199 +7,213 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import remarkGfm from "remark-gfm";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import remarkRehype from "remark-rehype";
 
 export interface TableOfContentsItem {
-    id: string;
-    title: string;
-    level: number;
+  id: string;
+  title: string;
+  level: number;
 }
 
 export const getTOC = (content: string) => {
-    const headingRegex = /^(#{1,6})\s+(.+)$/gm;
-    const tableOfContents: TableOfContentsItem[] = [];
-    let match;
+  const headingRegex = /^(#{1,6})\s+(.+)$/gm;
+  const tableOfContents: TableOfContentsItem[] = [];
+  let match;
 
-    while ((match = headingRegex.exec(content)) !== null) {
-        const level = match[1].length;
-        const title = match[2].trim().replace(/object-object/g, "");
-        const id = title
-            .toLowerCase()
-            .replace(/[^\w\s-]/g, "")
-            .replace(/\s+/g, "-")
-            .replace(/^-+|-+$/g, "")
-            .replace(/--+/g, "-");
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length;
+    const title = match[2].trim().replace(/object-object/g, "");
+    const id = title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .replace(/--+/g, "-");
 
-        tableOfContents.push({
-            id,
-            title,
-            level,
-        });
-    }
+    tableOfContents.push({
+      id,
+      title,
+      level,
+    });
+  }
 
-    return tableOfContents;
+  return tableOfContents;
 };
 
 export interface PostData {
-    title: string;
-    date: string;
-    description: string;
-    content: React.ReactNode;
-    tableOfContents: TableOfContentsItem[];
-    tags: string[];
+  title: string;
+  date: string;
+  description: string;
+  content: React.ReactNode;
+  tableOfContents: TableOfContentsItem[];
+  tags: string[];
 }
 
 export async function getPost(id: string): Promise<PostData | null> {
-    try {
-        const postsDirectory = path.join(process.cwd(), "posts");
-        const fullPath = path.join(postsDirectory, `${id}.mdx`);
+  try {
+    const postsDirectory = path.join(process.cwd(), "posts");
+    const fullPath = path.join(postsDirectory, `${id}.mdx`);
 
-        if (!fs.existsSync(fullPath)) {
-            return null;
-        }
-
-        const fileContents = fs.readFileSync(fullPath, "utf8");
-        const { data, content } = matter(fileContents);
-
-        // Generate table of contents
-        const tableOfContents = getTOC(content);
-
-        // Compile MDX content with math plugins
-        const { content: compiledContent } = await compileMDX({
-            source: content,
-            options: {
-                parseFrontmatter: true,
-                mdxOptions: {
-                    remarkPlugins: [remarkMath, remarkGfm],
-                    rehypePlugins: [
-                        rehypeKatex,
-                        rehypeAutolinkHeadings,
-                    ],
-                },
-            },
-            components: mdxComponents,
-        });
-
-        return {
-            title: data.title || id,
-            date: data.date || "",
-            description: data.description || "",
-            content: compiledContent,
-            tableOfContents,
-            tags: data.tags || [],
-        };
-    } catch (error) {
-        console.error("Error getting post:", error);
-        return null;
+    if (!fs.existsSync(fullPath)) {
+      return null;
     }
+
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const { data, content } = matter(fileContents);
+
+    // Generate table of contents
+    const tableOfContents = getTOC(content);
+
+    // Compile MDX content with math plugins
+    const { content: compiledContent } = await compileMDX({
+      source: content,
+      options: {
+        parseFrontmatter: true,
+        mdxOptions: {
+          remarkPlugins: [remarkMath, remarkGfm],
+          rehypePlugins: [rehypeKatex, rehypeAutolinkHeadings],
+          remarkRehypeOptions: {
+            footnoteBackContent: "Back ↑",
+          },
+        },
+      },
+      components: mdxComponents,
+    });
+
+    return {
+      title: data.title || id,
+      date: data.date || "",
+      description: data.description || "",
+      content: compiledContent,
+      tableOfContents,
+      tags: data.tags || [],
+    };
+  } catch (error) {
+    console.error("Error getting post:", error);
+    return null;
+  }
 }
 
 export interface Post {
-    id: string;
-    title: string;
-    date: string;
-    description: string;
-    tags: string[];
+  id: string;
+  title: string;
+  date: string;
+  description: string;
+  tags: string[];
 }
 
-export async function getAmericanIdentityPost(id: string): Promise<PostData | null> {
-    try {
-        const postsDirectory = path.join(process.cwd(), "posts", "american-identity");
-        const fullPath = path.join(postsDirectory, `${id}.mdx`);
+export async function getAmericanIdentityPost(
+  id: string,
+): Promise<PostData | null> {
+  try {
+    const postsDirectory = path.join(
+      process.cwd(),
+      "posts",
+      "american-identity",
+    );
+    const fullPath = path.join(postsDirectory, `${id}.mdx`);
 
-        if (!fs.existsSync(fullPath)) {
-            return null;
-        }
-
-        const fileContents = fs.readFileSync(fullPath, "utf8");
-        const { data, content } = matter(fileContents);
-
-        // Generate table of contents
-        const tableOfContents = getTOC(content);
-
-        // Compile MDX content with math plugins
-        const { content: compiledContent } = await compileMDX({
-            source: content,
-            options: {
-                parseFrontmatter: true,
-                mdxOptions: {
-                    remarkPlugins: [remarkMath, remarkGfm],
-                    rehypePlugins: [rehypeKatex, rehypeAutolinkHeadings],
-                },
-            },
-            components: mdxComponents,
-        });
-
-        return {
-            title: data.title || id,
-            date: data.date || "",
-            description: data.description || "",
-            content: compiledContent,
-            tableOfContents,
-            tags: data.tags || [],
-        };
-    } catch (error) {
-        console.error("Error getting American Identity post:", error);
-        return null;
+    if (!fs.existsSync(fullPath)) {
+      return null;
     }
+
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const { data, content } = matter(fileContents);
+
+    // Generate table of contents
+    const tableOfContents = getTOC(content);
+
+    // Compile MDX content with math plugins
+    const { content: compiledContent } = await compileMDX({
+      source: content,
+      options: {
+        parseFrontmatter: true,
+        mdxOptions: {
+          remarkPlugins: [remarkMath, remarkGfm],
+          rehypePlugins: [rehypeKatex, rehypeAutolinkHeadings],
+          remarkRehypeOptions: {
+            footnoteBackContent: "Back ↑",
+          },
+        },
+      },
+      components: mdxComponents,
+    });
+
+    return {
+      title: data.title || id,
+      date: data.date || "",
+      description: data.description || "",
+      content: compiledContent,
+      tableOfContents,
+      tags: data.tags || [],
+    };
+  } catch (error) {
+    console.error("Error getting American Identity post:", error);
+    return null;
+  }
 }
 
 export async function getAmericanIdentityPosts(): Promise<Post[]> {
-    try {
-        const postsDirectory = path.join(process.cwd(), "posts", "american-identity");
-        const fileNames = fs.readdirSync(postsDirectory);
+  try {
+    const postsDirectory = path.join(
+      process.cwd(),
+      "posts",
+      "american-identity",
+    );
+    const fileNames = fs.readdirSync(postsDirectory);
 
-        const posts = fileNames
-            .filter((fileName) => fileName.endsWith(".mdx"))
-            .map((fileName) => {
-                const id = fileName.replace(/\.mdx$/, "");
-                const fullPath = path.join(postsDirectory, fileName);
-                const fileContents = fs.readFileSync(fullPath, "utf8");
-                const { data } = matter(fileContents);
+    const posts = fileNames
+      .filter((fileName) => fileName.endsWith(".mdx"))
+      .map((fileName) => {
+        const id = fileName.replace(/\.mdx$/, "");
+        const fullPath = path.join(postsDirectory, fileName);
+        const fileContents = fs.readFileSync(fullPath, "utf8");
+        const { data } = matter(fileContents);
 
-                return {
-                    id,
-                    title: data.title || id,
-                    date: data.date || "",
-                    description: data.description || "",
-                    tags: data.tags || [],
-                };
-            })
-            .filter((post) => post.id !== "index") // Exclude index from the list
-            .sort((a, b) => a.title.localeCompare(b.title));
+        return {
+          id,
+          title: data.title || id,
+          date: data.date || "",
+          description: data.description || "",
+          tags: data.tags || [],
+        };
+      })
+      .filter((post) => post.id !== "index") // Exclude index from the list
+      .sort((a, b) => a.title.localeCompare(b.title));
 
-        return posts;
-    } catch (error) {
-        console.error("Error getting American Identity posts:", error);
-        return [];
-    }
+    return posts;
+  } catch (error) {
+    console.error("Error getting American Identity posts:", error);
+    return [];
+  }
 }
 
 export async function getPosts(): Promise<Post[]> {
-    try {
-        const postsDirectory = path.join(process.cwd(), "posts");
-        const fileNames = fs.readdirSync(postsDirectory);
+  try {
+    const postsDirectory = path.join(process.cwd(), "posts");
+    const fileNames = fs.readdirSync(postsDirectory);
 
-        const posts = fileNames
-            .filter((fileName) => fileName.endsWith(".mdx"))
-            .map((fileName) => {
-                const id = fileName.replace(/\.mdx$/, "");
-                const fullPath = path.join(postsDirectory, fileName);
-                const fileContents = fs.readFileSync(fullPath, "utf8");
-                const { data } = matter(fileContents);
+    const posts = fileNames
+      .filter((fileName) => fileName.endsWith(".mdx"))
+      .map((fileName) => {
+        const id = fileName.replace(/\.mdx$/, "");
+        const fullPath = path.join(postsDirectory, fileName);
+        const fileContents = fs.readFileSync(fullPath, "utf8");
+        const { data } = matter(fileContents);
 
-                return {
-                    id,
-                    title: data.title || id,
-                    date: data.date || "",
-                    description: data.description || "",
-                    tags: data.tags || [],
-                };
-            })
-            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        return {
+          id,
+          title: data.title || id,
+          date: data.date || "",
+          description: data.description || "",
+          tags: data.tags || [],
+        };
+      })
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-        return posts;
-    } catch (error) {
-        console.error("Error getting posts:", error);
-        return [];
-    }
+    return posts;
+  } catch (error) {
+    console.error("Error getting posts:", error);
+    return [];
+  }
 }

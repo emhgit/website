@@ -168,6 +168,26 @@ body {
   margin-left: 0.25rem;
 }
 
+.dark .data-footnote-backref,
+.dark .footnotes li a[data-footnote-backref],
+.dark .footnotes li a.revfootnote {
+  font-family: ui-sans-serif, system-ui, sans-serif !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  color: #f87171 !important;
+  text-decoration: underline !important;
+}
+
+.data-footnote-backref,
+.footnotes li a[data-footnote-backref],
+.footnotes li a.revfootnote {
+  font-family: ui-sans-serif, system-ui, sans-serif !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  color: #f87171 !important;
+  text-decoration: underline !important;
+}
+
 .bibliography-entry p {
   margin-left: 2rem;
   text-indent: -2rem;
