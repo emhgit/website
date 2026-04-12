@@ -8,7 +8,7 @@ const sections = [
       "Exploring the foundations and limitations of American democratic principles",
   },
   {
-    id: "equal-protection",
+    id: "equal-protection-and-due-process",
     title: "Equal Protection and Due Process",
     description:
       "Examining constitutional guarantees and their historical application",
