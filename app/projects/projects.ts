@@ -80,7 +80,7 @@ export const projects: Project[] = [
     name: "Personal Website (This)",
     tags: ["Next.js", "Tailwind CSS", "Vercel"],
     description:
-      "A personal website built with Next.js and Tailwind CSS, deployed with Vercel.",
+      "A personal website built with Next.js and Tailwind CSS, deployed with Vercel. Created blog post system with rendered MDX content, as well as a search feature using flexsearch.",
     githubUrl: "https://github.com/emhgit/website",
     liveUrl: "https://elliottmharper.dev",
   },
