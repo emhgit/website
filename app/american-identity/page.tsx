@@ -6,7 +6,7 @@ import { createMetadata } from "@/lib/seo";
 export const metadata = createMetadata({
   title: "American Identity",
   description:
-    "An exploration of American identity through the lens of democracy, equal protection, freedom of expression, and privacy",
+    "American identity is characterized by the ongoing and often violent conflict between professed ideals—namely democracy, equal protection and due process, freedom of expression, and privacy—and the systemic exclusion of various marginalized groups from those ideals. This study evaluates government archives, Supreme Court opinions, oral arguments, legal briefs, scholarly literature, legislation, and primary source documents to analyze the development of American identity vis-à-vis the four aforementioned American ideals. ",
   path: "/american-identity",
 });
 
