@@ -26,12 +26,6 @@ const sections = [
       "Investigating the development of privacy rights in American law",
   },
   {
-    id: "conclusion",
-    title: "Conclusion",
-    description:
-      "Summarizing the key findings and implications of the American identity study",
-  },
-  {
     id: "bibliography",
     title: "Bibliography",
     description:
