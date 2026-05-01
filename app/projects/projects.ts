@@ -11,7 +11,7 @@ interface Project {
 export const projects: Project[] = [
   {
     id: "1",
-    name: "USACO Guide (Next.js Migration)",
+    name: "USACO Guide: Next.js Migration",
     tags: [
       "Next.js",
       "Gatsby",
@@ -34,7 +34,7 @@ export const projects: Project[] = [
     name: "Economic Data Visualizer",
     tags: ["Vanilla JavaScript", "Chart.js", "World Bank API", "Cloudflare"],
     description:
-      "Fetches real-time economic indicators from the World Bank API and allows users to generate visual dashboards using Chart.js.",
+      "Developed web application that fetches real-time economic indicators from the World Bank API and allows users to generate visual dashboards using Chart.js.",
     githubUrl: "https://github.com/emhgit/economic-data-visualizer",
     liveUrl: "https://economic-data-visualizer.net/",
     imageUrl: "/economic-data-visualizer-thumb.png",
@@ -44,16 +44,25 @@ export const projects: Project[] = [
     name: "American Identity Research Project",
     tags: ["Next.js", "MDX", "Vercel", "Historical Research"],
     description:
-      "Historical research project that studies four core American ideals—democracy, equal protection and due process, freedom of expression, and privacy—and their conflict across U.S. History. Displayed using rendered MDX content.",
+      "Conducted a historical research project, studying four core American ideals—democracy, equal protection and due process, freedom of expression, and privacy—and their conflict across U.S. History. Displayed using rendered MDX content.",
     liveUrl: "https://elliottmharper.dev/american-identity",
     imageUrl: "/am-id-ss.png",
+  },
+  {
+    id: "usaco-guide-groups",
+    name: "USACO Guide: Groups Student Assignment Progress Manager",
+    tags: ["Next.js", "MDX", "TypeScript", "Vercel", "Firebase"],
+    description:
+      "Implemented a student progress management system for the USACO Guide Groups software, allowing coaches to maintain a collection of student progress for competitive programming assignments.",
+    liveUrl: "https://usaco.guide/groups",
+    imageUrl: "/usaco-guide-groups-ss.png",
   },
   {
     id: "cp",
     name: "Competitive Programming",
     tags: ["C++", "Java", "Maven"],
     description:
-      "A collection of competitive programming problems and solutions in C++ and Java.",
+      "Solved and compiled a collection of competitive programming problems and solutions in C++ and Java.",
     githubUrl: "https://github.com/emhgit/competitive-programming",
   },
   {
@@ -61,7 +70,7 @@ export const projects: Project[] = [
     name: "Competitive Programming Initiative (CPI)",
     tags: ["Next.js", "Tailwind CSS", "Vercel"],
     description:
-      "Maintained website for the Competitive Programming Initiative (CPI), a non-profit organization dedicated to promoting competitive programming education and resources.",
+      "Maintained and improved website for the Competitive Programming Initiative (CPI), a non-profit organization dedicated to promoting competitive programming education and resources.",
     githubUrl: "https://github.com/cpinitiative/cpinitiative",
     liveUrl: "https://joincpi.org",
     imageUrl: "/cpi-ss.png",
@@ -80,7 +89,7 @@ export const projects: Project[] = [
     name: "Personal Website (This)",
     tags: ["Next.js", "Tailwind CSS", "Vercel"],
     description:
-      "A personal website built with Next.js and Tailwind CSS, deployed with Vercel. Created blog post system with rendered MDX content, as well as a search feature using flexsearch.",
+      "Developed a personal website built with Next.js and Tailwind CSS, deployed with Vercel. Created blog post system with rendered MDX content, as well as a search feature using flexsearch.",
     githubUrl: "https://github.com/emhgit/website",
     liveUrl: "https://elliottmharper.dev",
   },
