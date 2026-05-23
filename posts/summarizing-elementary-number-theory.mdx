@@ -1,0 +1,136 @@
+---
+id: "summarizing-elementary-number-theory"
+title: "Summarizing Elementary Number Theory"
+date: "05/22/2026"
+description: "I explain what I've learned through self-study of the first 5 chapters of the Art of Problem Solving: Introduction to Number Theory by Mathew Crawford."
+tags: ["AoPS", "Art of Problem Solving", "Number Theory", "integers", "primes and composites", "multiples and divisors", "prime factorization"]
+---
+
+# Summarizing Elementary Number Theory
+
+Having heard that the AoPS textbooks were great ways to learn the mathematics necessary for various competitive programming problems, I ordered two of them around six months ago, one of them being *the Art of Problem Solving: Introduction to Number Theory* by Mathew Crawford. Attempting to work through the textbook while simultaneously handling schoolwork, work, and other activities was difficult, so I've only been able to complete 5 chapters. The school year officially ended today, however, and I thought it would be a good idea to pick back up what I was learning. I aim to summarize the knowledge I have already gained and make future posts regarding more advanced number theory topics.
+
+## Chapter 1. Integers: The Basics
+
+As its title suggests, this chapter primarily covers the basics of number theory: nomenclature and foundational relationships among integers. Many of the concepts in this chapter—including positive and negative integers—are taught well before high school and are thus pretty rudimentary. However, there were some concepts that I had forgotten about that I brushed up on, as well as new symbols I hadn't seen before. For example:
+
+- A **proper divisor** of an integer $a$ is positive and not equal to $a$.
+- A **multiple** of an integer $a$ is the product of $a$ and any other integer $b$.
+- The symbol $|$ denotes "divides." So, $a$ divides $b$ can be written in mathematical terms as $a | b$.
+- Addition, subtraction, multiplication, and exponentiation can be called "fast counting."
+
+These are basic definitions, but they lay the logical groundwork for the later chapters.
+
+## Chapter 2. Primes and Composites
+
+Chapter 2 involves definitions for prime and composites, as well as methods for identifying prime numbers. These definitions are fairly well-known:
+
+- **Prime numbers** are positive integers greater than 1 whose only positive divisors are 1 and itself.
+- **Composite numbers** are positive integers with some positive factor besides 1 and itself.
+
+What I find interesting is the algorithms for identifying prime numbers. The chapter details the **Sieve of Eratosthenes** (an algorithm [I've briefly wrote about before](http://elliottmharper.dev/posts/sieve-of-eratosthenes)). It also goes over helpful heuristics for finding prime numbers, namely that a positive integer $a$ is prime if it has no prime divisors less than or equal to $\sqrt{a}$.
+
+## Chapter 3. Multiples and Divisors
+
+Chapter 3 discusses common factors, common multiples, and remainders (this is one of the longer chapters). It provides several useful definitions:
+
+- The largest common divisor of a group of integers is the **Greatest Common Factor** (GCD).
+- The smallest common multiple of a group of integers is the **Least Common Multiple** (LCM).
+- Two integers are **coprime** or **relatively prime** if they only have a common factor of 1.
+
+It also includes the **Division Algorithm**, which states that for any integer $a$ and positive integer $b$, there exists exactly one pair of integers $q$ and $r$ such that
+
+$$
+a = bq + r
+$$
+
+where $0 \le r < b$. $a$ is the dividend, $b$ is the divisor, $q$ is the quotient, and $r$ is the remainder.
+
+This algorithm allows number theory problems involving remainders to be solved, such as "find the largest integer less than 50 that leaves a remainder of 3 when divided by 5":
+
+$$
+a = 5q + 3  < 50 \implies q < \frac{47}{5}, \lfloor \frac{47}{5} \rfloor = 9 
+\\
+5(9) + 3 = 48
+$$
+
+In addition, the chapter covers the **Euclidean Algorithm**:
+
+$$
+gcd(m, n) = gcd(m - n, n)
+$$
+
+for any positive integers $m$ and $n$, where $m > n$. The chapter also goes over the **extended Euclidean Algorithm**, which states that $m$ and $n$ are integers such that $m = qn + r$, where $0 \le r < n$. Then
+
+$$
+gcd(m, n) = gcd(r, n)
+$$
+
+C++ implementation:
+
+```cpp
+/**
+* Greatest common divisor via extended Euclidean Algorithm.
+* Time complexity: O(log(min(a,b)))
+* @param a first input
+* @param b second input
+* @return gcd(a,b)
+*/
+long gcd(long a, long b)
+{
+    long dividend = max(a, b), quotient = min(a, b), remainder = dividend % quotient;
+    while (remainder != 0)
+    {
+        dividend = quotient;
+        quotient = remainder;
+        remainder = dividend % quotient;
+    }
+    return quotient;
+}
+```
+<br />
+
+This simplification uses the Division Algorithm to shorten the standard Euclidean Algorithm, which shows how the topics start to build on each other. 
+
+Further, the chapter briefly covers some basic problems involving the LCM and its notation ($lcm[m, n]$). These topics are extended in the next chapter, which uses prime factorization as a quicker method for calculating the GCD and LCM.
+
+## Chapter 4. Prime Factorization
+
+The premise of Chapter 4 is that all integers are "constructed" from primes, with the sole exception of 1. This property, formally known as the **Fundamental Theorem of Arithmetic**, enables several methods for calculating common multiples and common factors. 
+
+I remember playing the "factor tree game" in middle school without really knowing the significance of primes, so knowing how to apply prime factorization to number theory problems reshaped my understanding of prime factorization. I'll list a few concepts that demonstrate this:
+
+- The prime factorization of any multiple of a positive integer $a$ contains the entire prime factorization of $a$.
+- The exponent of each prime in an LCM's prime factorization is the greatest exponent of that prime among the prime factorizations of the integers in a group. Or, mathematically, 
+
+$$
+lcm[a, b] = p_{1}^{max(e_1, e_2, ..., e_n)} \cdot \cdot \cdot p_{n}^{max(e_1, e_2, ..., e_n)}
+$$
+
+- The exponent of each prime in a GCD's prime factorization is the smallest exponent of that prime among the prime factorizations of the integers in a group. Or, mathematically, 
+
+$$
+gcd(a, b) = p_{1}^{min(e_1, e_2, ..., e_n)} \cdot \cdot \cdot p_{n}^{min(e_1, e_2, ..., e_n)}
+$$
+
+- $gcd(ac, bc) = c \gcd(a, b)$
+- $lcm[ac, bc] = c \cdot lcm[a, b]$
+- $\frac{ab}{gcd(a, b)} = lcm[a, b]$
+
+## Chapter 5. Divisor Problems
+
+Chapter 5 describes a method to count the number of positive divisors an integer has, and then applies that method to count certain types of divisors.
+
+Let $t(n)$ represent a function that outputs the total number of positive divisors for $n$. $n$ is a positive integer with the prime factorization
+
+$$
+n = p_{1}^{e_1} \cdot p_{2}^{e_2} \cdot \cdot \cdot p_{m}^{e_m}
+$$
+
+Then
+
+$$
+t(n) = (e_1 + 1) \cdot (e_2 + 1) \cdot \cdot \cdot (e_m + 1)
+$$
+
+Using this method, it can be shown that a positive integer is a perfect square iff it has an odd number of positive divisors. The rest of the chapter goes into even more depth with this method, utilizing it against various scenarios. 
