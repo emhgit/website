@@ -30,6 +30,38 @@ export const projects: Project[] = [
     imageUrl: "/usaco-guide-banner-image-big.jpg",
   },
   {
+    id: "Accelence",
+    name: "Accelence: Sonar-Based Sprint Timing System",
+    tags: ["Sonar", "Embedded Systems", "C/C++", "Arduino Microcontroller"],
+    description:
+      "Developed low-cost (<$10) sonar-based electronic timing solution designed for track and field applications during MITES Summer 2026.",
+    githubUrl: "https://github.com/walruto/MITES-FINAL",
+    imageUrl: "/accelence.png",
+  },
+  {
+    id: "graph-viz",
+    name: "USACO Guide: Graph Vizualizer",
+    description:
+      "Assisted development of desktop-first editor for creating step-by-step graph algorithm visuals, animations, slides, videos, and editable project files.",
+    liveUrl: "https://graph-viz.usaco.guide",
+    imageUrl: "/graph-viz.png",
+    tags: ["graph algorithms", "visualization", "education", "USACO"],
+  },
+  {
+    id: "emergence-of-meaning",
+    name: "The Emergence of Meaning Across Interpretative Systems",
+    description:
+      "Research project exploring how meaning emerges from the interaction of representation, interpretation, medium, and context across information theory, communication theory, and semiotics.",
+    imageUrl: "/interpretative_systems_model.png",
+    tags: [
+      "information theory",
+      "semiotics",
+      "communication",
+      "philosophy",
+      "education",
+    ],
+  },
+  {
     id: "Economic Data Visualizer",
     name: "Economic Data Visualizer",
     tags: ["Vanilla JavaScript", "Chart.js", "World Bank API", "Cloudflare"],
