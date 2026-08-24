@@ -1,4 +1,6 @@
+"use client";
 import React, { useState, FormEvent, CSSProperties } from 'react';
+
 
 export default function DiagnosticPortal() {
   const [username, setUsername] = useState('');
