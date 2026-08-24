@@ -1,9 +1,9 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, CSSProperties } from 'react';
 
-export default function DiagnosticPortal(): JSX.Element {
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+export default function DiagnosticPortal() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,7 +63,7 @@ export default function DiagnosticPortal(): JSX.Element {
   );
 }
 
-const styles: { [key: string]: React.CSSProperties } = {
+const styles: Record<string, CSSProperties> = {
   body: {
     fontFamily: 'Arial, sans-serif',
     backgroundColor: '#2c3e50',
@@ -122,4 +122,3 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: '100%',
   },
 };
-
